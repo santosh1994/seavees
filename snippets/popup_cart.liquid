@@ -1,0 +1,95 @@
+  <div class="header">
+    <h2>
+      Shopping Bag
+    </h2>
+
+    <p class="promo_line">
+      Free Domestic Shipping Over $50
+    </p>
+  </div>
+
+{% if cart.item_count > 0 %}
+
+
+    {% for item in cart.items %}    
+    
+    {% comment %}
+    Determining the handle of the collection that was last seen for the 'continue shopping' link.
+    {% endcomment %}
+
+    {% if forloop.first %}
+    {% assign collection_url = item.product.collections.first.url %}
+    {% if collection_url == '/collections/frontpage' or collection_url == '' %}{% assign collection_url = '/collections/all' %}{% endif %}
+    {% endif %}
+
+    <div class="line-item row-fluid">
+
+        <div class="image">
+            <a href="{{ item.product.url | within: collections.all }}">  
+                <img src="{{ item.product.featured_image.src | product_img_url: 'compact' }}" alt="{{ item.title | escape }}" />
+            </a>
+        </div>
+        <div class="info">
+            <a href="{{ item.product.url | within: collections.all }}">
+                {% if item.product.metafields.c_f.short_name %}
+                <span class="short_name">
+                    {{ item.product.metafields.c_f.short_name }}
+                </span>
+                {% endif %}
+
+                <span class="long_name">
+                    {{ item.product.title }}
+                </span>
+
+                <span class="materials">
+                    {{ item.product.metafields.c_f.product_material }} 
+                    {{ item.product.metafields.c_f.colorway }}
+                </span>
+
+                <span class="size">
+                    Size: {{ item.variant.option1 }}
+                </span>
+
+                <span class="quantity">
+                    QTY: {{ item.quantity }} 
+                    <!--
+                    {% if item.product.compare_at_price > item.product.price %}
+                    <span style="text-decoration:line-through;">{{ item.product.compare_at_price_max | money  | remove: " "}}</span> 
+                    <span>{{ item.product.price | money  | remove: " "}}</span>
+                    {% else %}
+                    {{ item.product.price | money  | remove: " "}}
+                    {% endif %}
+                    -->
+                    
+                    {{ item.product.price | money  | remove: " "}}
+
+                </span>
+            </a>
+        </div>
+
+    </div> 
+
+    {% endfor %}
+<div class="cart-popup-footer">
+    <p class="subtotal">
+      Subtotal: {{ cart.total_price | money }}
+    </p>
+
+    <a class="checkout-button btn btn-primary" href="/cart"> Checkout </a>
+
+    <p class="close_popup">
+        <a href="http://seavees.com/">Continue Shopping</a>
+    </p>
+</div>
+
+{% else %}
+
+<div class="cart-popup-footer">
+    <p class="empty_cart">There are no items in your bag yet.</p>
+
+    <p class="close_popup">
+        <a href="http://seavees.com/">Continue Shopping.</a>
+    </p>
+</div>
+
+{% endif %}

@@ -1,0 +1,44 @@
+{% comment %}
+<script src="//foursixty.com/media/scripts/fs.slider.v2.js" data-feed-id="seavees" 
+        data-prepend-detail="true" 
+       	data-page-size="8"
+        data-cell-size="20%"
+        data-connector-filter="9746"
+        data-instagram-thumbnail-size="306"
+        data-product-images="false"></script>
+{% endcomment %}
+<div id="foursixty_container"></div>
+    <script>
+     $(document).on('ready', function() {
+       var script = document.createElement('script');
+       script.src = '//foursixty.com/media/scripts/fs.slider.v2.js';
+       script.setAttribute('data-feed-id', "seavees");
+       script.setAttribute('data-prepend-detail', "true") ;
+       script.setAttribute('data-page-size', "8");
+       script.setAttribute('data-cell-size', "20%");
+       script.setAttribute('data-connector-filter', "9746");
+       script.setAttribute('data-instagram-thumbnail-size', "306");
+       script.setAttribute('data-product-images', "false");
+       
+       if (window.ga) {
+         var trackers = ga.getAll(),
+             trackerName = undefined;
+         for (var i = 0; i < trackers.length; ++i) {
+           var tracker = trackers[i];
+           trackerName = (tracker.get('name') == "" ? "(unnamed)" : tracker.get('name'));
+         }
+         script.setAttribute('data-tracking-name', trackerName);
+       }
+       document.getElementById('foursixty_container').appendChild(script);
+     })
+    </script>
+<style>
+  {% include 'foursixty-customizations' %}
+  .fs-wrapper {
+   	margin: 20px 0 18px 0; 
+  }
+  
+  @media (max-width: 768px) {
+    div.fs-entry-container { width: 33.333% !important; padding-top: 33.333% !important; } 
+  }
+</style>

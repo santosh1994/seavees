@@ -1,0 +1,15 @@
+<div class="product-tile span3 promo-collection-block" data-layout="{% include 'shortcode-render' render:'layout' default:'top' %}" data-collection-position="{% include 'shortcode-render' render:'position' default:'6' %}">
+    <a href="{% include 'shortcode-render' render:'link' default:'/' %}" style="color:{% include 'shortcode-render' render:'color' default:'#000000' %};">
+        <div class="collection-block vertical-align">
+            <div class="product-image">
+                <img src="{% include 'shortcode-render' render:'image' %}" alt="{% include 'shortcode-render' render:'title' default:'' %} {% include 'shortcode-render' render:'subtitle' default:'' %}">
+            </div>
+            <div class="product-info">
+                <div class="name">
+                    <span class="long_name">{% include 'shortcode-render' render:'title' %}</span>
+                    <span class="materials_color">{% include 'shortcode-render' render:'subtitle' %}</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>

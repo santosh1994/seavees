@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="{{ checkout_html_classes }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+
+    <title>{{ shop.name }} - {{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    <script src="//use.typekit.net/kjp2toe.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    {{ checkout_scripts }}
+
+    <!-- begin Convert Experiments code--><script type="text/javascript">var _conv_host = (("https:" == document.location.protocol) ? "https://d9jmv9u00p0mv.cloudfront.net" : "http://cdn-1.convertexperiments.com");document.write(decodeURIComponent("%3Cscript src='" + _conv_host + "/js/10014300-10013673.js' type='text/javascript'%3E%3C/script%3E"));</script><!-- end Convert Experiments code -->
+
+  </head>
+  <body>
+
+    {{ content_for_banner }}
+    {{ content_for_layout }}
+    {{ content_for_footer }}
+
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KHDRFP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KHDRFP');</script>
+    <!-- End Google Tag Manager -->
+
+    <script>
+        (function(document) {
+            var t = document.getElementById('contact-information');
+            if (t !== null) {
+                t.getElementsByTagName('h3')[0].innerHTML = 'YOUR INFORMATION';
+            }
+        }(document));
+        var prodId = {{ checkout.line_items | map: 'product_id' | json }};
+        var totalvalue = {{ checkout.total_price | money_without_currency | json }};
+
+        dataLayer.push({
+          'event': 'fireRemarketingTag',
+          'google_tag_params': {
+            'ecomm_prodid': prodId,
+            'ecomm_pagetype': 'purchase',
+            'ecomm_totalvalue': totalvalue
+          }
+        });
+    </script>
+
+    {{ tracking_code }}
+
+  </body>
+</html>

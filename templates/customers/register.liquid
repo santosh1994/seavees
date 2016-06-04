@@ -1,0 +1,75 @@
+{% layout settings.customer_layout %}
+
+<div id="template" class="container" role="main">
+
+	<div id="corner-shoe" class="js-corner-shoe hidden-phone">
+
+        {% for product in collections.corner-shoe.products %}
+
+        <img class="main_image" src="https://s3.amazonaws.com/seavees-production/highlight_shoes/1/default/Bocce_sale_Shoe_Corner.jpg?1405542684" alt="{{ product.featured_image.alt | escape }}" />
+        <a href="{{ product.url | within: collection }}"></a>
+
+        {% endfor %}
+
+    </div>
+
+    <header role="main">
+        <h1>Sign Up with SeaVees</h1>
+    </header>
+
+
+  	<div id="customer" class="page_container">
+  		<div id="login-panel">
+
+
+		  	<!-- Create Customer -->
+		  	<div id="create-customer">
+
+			    <div class="row-fluid">
+                    <div class="span12">
+                        <h2>Sign Up</h2>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+					<div class="span4 offset4">
+
+					    {% form 'create_customer' %}
+							{{ form.errors | default_errors }}
+
+							<div class="clearfix control-group">
+								<label for="first_name" class="login">First Name</label>
+								<input type="text" value="" name="customer[first_name]" id="first_name" class="title input-xlarge" size="30" />
+							</div>
+
+							<div class="clearfix control-group">
+								<label for="last_name" class="login">Last Name</label>
+								<input type="text" value="" name="customer[last_name]" id="last_name" class="title input-xlarge" size="30" />
+							</div>
+
+							<div class="clearfix control-group">
+								<label for="email" class="login">Email</label>
+								<input type="email" value="" name="customer[email]" id="email" class="title input-xlarge" size="30" />
+							</div>
+
+							<div class="clearfix control-group">
+								<label for="password" class="login">Password</label>
+								<input type="password" value="" name="customer[password]" id="password" class="title input-xlarge password" size="30" />
+							</div>
+
+							<div class="action_bottom">
+								<button class="btn btn-primary" type="submit" value="Create" tabindex="4">Sign Up</button>
+							</div>
+					    {% endform %}
+
+					    <div class="actions">
+                            <a href="#" onclick="hideRecoverPasswordForm();return false;">Login as Existing Customer</a>
+                        </div>
+					</div>
+				</div>
+
+		 	</div><!-- /#create-customer -->
+
+		</div>
+  	</div>
+</div>

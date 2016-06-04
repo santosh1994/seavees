@@ -1,0 +1,89 @@
+<script type="text/javascript">
+var UnbxdSiteName = "seavees_staging_myshopify_com-u1452116713575";
+var UnbxdApiKey = "3219d8b987685bc0ca5dffb83e121614";
+var UnbxdWidgetsConf = {
+{% if template contains 'product' %}
+pid : "{{product.id}}",
+{% elsif template contains 'collection' %}
+category : "{{collection.title}}",
+{% endif %}
+currency : "{{shop.currency}}"
+};
+setInterval(function(){
+if (window.Unbxd && window.Currency){
+if (UnbxdWidgetsConf.currency != window.Currency.currentCurrency){
+UnbxdWidgetsConf.currency = window.Currency.currentCurrency;
+if (Unbxd.refreshWidgets)
+Unbxd.refreshWidgets();}}},100);
+if(window.Unbxd==undefined){
+window.Unbxd={}
+}
+var x=Unbxd.postLoad;
+Unbxd.postLoad = function(){
+if(x!=undefined&&typeof x=="function"){x()}
+function createCookie(name,value,days){
+if (days) {
+var date = new Date();date.setTime(date.getTime()+(days*24*60*60*1000));var expires = "; expires="+date.toGMTString();}
+else var expires = "";
+document.cookie = name+"="+value+expires+"; path=/";}
+function readCookie(name) {
+var nameEQ = name + "=";
+var ca = document.cookie.split(';');
+for(var i=0;i < ca.length;i++) {
+var c = ca[i];while (c.charAt(0)==' ') c = c.substring(1,c.length);
+if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);}
+return null;}
+function eraseCookie(name) {
+createCookie(name,"",-1);}
+var cart_token = readCookie('cart');
+if(cart_token){
+Unbxd.track("map_token",{token:cart_token});
+}
+{% if template contains 'product' %}
+Unbxd.track("click",{pid : "{{product.id }}", rank : "", box_type : ""});
+var iCanUseOn = !!$.fn.on;
+if(iCanUseOn){
+$("form[action='/cart/add']").find(":submit").on("click",function( event ) {
+Unbxd.track("addToCart",{pid : "{{product.id }}"});
+});
+}
+else{
+$("form[action='/cart/add']").delegate(":submit","click",function() {
+Unbxd.track("addToCart",{pid : "{{product.id }}"});
+});
+}
+{% endif %}
+}
+var loadScript = function(url,callback){
+var script = document.createElement("script");script.type = "text/javascript";
+if (script.readyState){
+script.onreadystatechange = function(){
+if (script.readyState == "loaded" ||
+script.readyState == "complete"){
+script.onreadystatechange = null;
+callback();
+}};
+}else { 
+ script.onload = function(){ 
+callback();
+ }; }
+script.src=url;document.getElementsByTagName("head")[0].appendChild(script);};
+var myAppJavaScript = function($){
+(function(){
+var ubx = document.createElement('script');ubx.type = 'text/javascript'; ubx.sync=true;
+ubx.src = '//unbxd.s3.amazonaws.com/unbxdAnalytics.js';
+(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ubx);})();
+(function(){
+var ubx = document.createElement('script');ubx.type = 'text/javascript'; ubx.sync=true;
+ubx.src = '//unbxd.s3.amazonaws.com/embed.js';
+(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ubx);})();
+}
+if ((typeof jQuery === 'undefined') || (parseFloat(jQuery.fn.jquery) < 1.7)) {
+loadScript('//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js', function(){
+jQueryUnbxd = jQuery.noConflict(true);
+myAppJavaScript(jQueryUnbxd);
+});
+} else {
+myAppJavaScript(jQuery);
+}
+</script>

@@ -1,0 +1,209 @@
+{% if product %}
+<style>
+.nosto_product * { font-family: "news-gothic-std", sans-serif !important; } 
+.nosto-heading h4 { text-align: left !important; color: #15698d !important; font-family: "news-gothic-std", sans-serif !important; font-size: 22px !important; line-height: 1.45em; text-transform: uppercase; font-weight: bold !important; }
+.nosto-heading h4 a {display: none !important; }
+.nosto-product-brand { display:none !important; }
+.nosto-product-name { color: #000 !important; font-family: "news-gothic-std", sans-serif !important; font-size: 14px !important; font-weight: bold !important; text-transform: uppercase !important; min-height:0px !important; }
+.nosto-product-price { color: #000 !important; font-family: "news-gothic-std", sans-serif !important; font-size: 14px !important; text-align: right; font-weight: bold !important; }
+.nosto-product-price * { color: #999 !important; font-family: "news-gothic-std", sans-serif !important; font-size: 14px !important; text-align: right; font-weight: bold !important; }
+.nosto-discounted .nosto-price-info .nosto-current-price .nosto-product-price { color: #000 !important; font-family: "news-gothic-std", sans-serif !important; font-size: 14px !important; text-align: right; font-weight:bold !important; }
+.nosto-product-image { width: 160px !important; height: 107px !important; overflow:hidden !important;}
+
+.nosto-discounted .nosto-price-info .nosto-old-price .nosto-product-price { color: #999 !important; text-decoration: line-through; }
+
+#productpage-nosto-1 .nosto-default {
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+}
+
+#productpage-nosto-3 .nosto-default {
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+}
+
+#productpage-nosto-1 .nosto-product-list li {
+    padding: 0px !important;
+}
+
+#productpage-nosto-2 .nosto-product-list li {
+    padding: 0px !important;
+}
+
+#productpage-nosto-3 .nosto-product-list li {
+    padding: 0px !important;
+}
+
+.u-max-full-width {
+max-width: 100%;
+box-sizing: border-box;
+}
+
+/* desktop 1200px HD */
+@media only screen and (min-width: 1025px) and (max-width: 1200px) { 
+.nosto-product-image { width: 140px !important; height: 94px !important; overflow:hidden !important;}
+}
+
+/* 511 to 563 */
+@media only screen and (min-width: 511px) and (max-width: 563px) { 
+#productpage-nosto-1 .nosto-default { margin-left: 40px !important; padding-left: 0px !important; margin-top: 0px !important; }
+#productpage-nosto-1 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+#productpage-nosto-2 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+}
+
+/* 511 to 563 */
+@media only screen and (min-width: 511px) and (max-width: 563px) { 
+#productpage-nosto-1 .nosto-default { margin-left: 40px !important; padding-left: 0px !important; margin-top: 0px !important; }
+#productpage-nosto-1 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+#productpage-nosto-2 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+}
+
+/* 564 to 600 */
+@media only screen and (min-width: 564px) and (max-width: 600px) { 
+#productpage-nosto-1 .nosto-default { margin-left: 40px !important; padding-left: 0px !important; margin-top: -31px !important; }
+#productpage-nosto-1 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+#productpage-nosto-2 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+}
+
+/* 601 to 639 */
+@media only screen and (min-width: 601px) and (max-width: 639px) { 
+#productpage-nosto-1 .nosto-default { margin-left: 40px !important; padding-left: 0px !important; margin-top: 0px !important; }
+#productpage-nosto-1 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+#productpage-nosto-2 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+/*.nosto-product-image { width: 100px !important; height: 69px !important; overflow:hidden !important;}*/
+
+}
+
+    /* 641 to 767 */
+@media only screen and (min-width: 641px) and (max-width: 767px) { 
+.nosto-product-image { width: 100px !important; height: 69px !important; overflow:hidden !important;}
+}
+
+
+/* tablets */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+
+.nosto-product-image { width: 100px !important; height: 69px !important; overflow:hidden !important;}
+
+}
+
+/* phone 320 - portrait */
+@media only screen and (min-width: 320px) and (max-width: 480px) and (orientation: portrait) {
+
+#productpage-nosto-1 .nosto-default { margin-left: 4px !important; padding-left: 0px !important; }
+.nosto-product-image { width: 140px !important; height: 94px !important; overflow:hidden !important;}
+
+}
+
+/* phone 320 - landscape */
+@media only screen and (min-width: 320px) and (max-width: 480px) and (orientation: landscape) {
+
+#productpage-nosto-1 .nosto-default { margin-left: 4px !important; padding-left: 0px !important; margin-top: 31px !important; }
+.nosto-product-image { width: 150px !important; height: 100px !important; overflow:hidden !important;}
+
+}
+
+/* iPhone5 Landscape */
+@media only screen and (min-width: 320px) and (max-width: 568px) and (orientation: landscape) {
+
+#productpage-nosto-1 .nosto-default { margin-left: 40px !important; padding-left: 0px !important; margin-top: 0px !important; }
+#productpage-nosto-1 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+#productpage-nosto-2 .nosto-3-products .nosto-product-list li { width: 100% !important; margin-left: 0px !important; margin-bottom:20px !important; }
+
+}
+
+/* phone 360 - landscape */
+@media only screen and (min-width: 569px) and (max-width: 640px) and (orientation: landscape) {
+
+#productpage-nosto-1 .nosto-default { margin-left: 4px !important; padding-left: 0px !important; }
+.nosto-product-image { width: 100px !important; height: 69px !important; overflow:hidden !important; padding-right: 10px; }
+
+}
+
+/* phone 375 - portrait */
+@media only screen and (min-width: 375px) and (orientation: portrait) {
+
+#productpage-nosto-1 .nosto-default { margin-left: 4px !important; padding-left: 0px !important; }
+
+}
+
+/* phone 414 - portrait*/
+@media only screen and (min-width: 414px) and (max-width: 639px) and (orientation: portrait) {
+
+.nosto-td-left { padding-top:31px !important; }
+
+}
+
+
+</style>
+
+    <div class="nosto_product" style="display:none">
+        <span class="url">{{shop.url}}{{product.url}}</span>
+        <span class="product_id">{{product.id}}</span>
+        <span class="name">{{ product.metafields.c_f.short_name }}</span>
+        <span class="name">{{product.title}}</span>
+        <span class="image_url">{{product.featured_image | product_img_url: 'large'}}</span>
+        <span class="thumb_url">{{product.featured_image | product_img_url: 'medium'}}</span>
+        <span class="price">{{product.variants[0].price | money_without_currency | remove: ','}}</span>
+        <span class="price_currency_code">{{shop.currency}}</span>
+        {% if product.available %}
+        <span class="availability">InStock</span>
+        {% else %}
+        <span class="availability">OutOfStock</span>
+        {% endif %}
+        <span class="category">{{product.type}}</span>
+        {% for collection in product.collections %}
+          <span class="category">{{collection.title}}</span>
+        {% endfor %}
+        <span class="description">{{product.description}}</span>
+        {% if product.variants[0].compare_at_price > product.variants[0].price%}
+        <span class="list_price">{{product.variants[0].compare_at_price | money_without_currency | remove: ','}}</span>
+        {% endif %}
+        <span class="brand">{{product.vendor}}</span>
+        {% for tag in product.tags %}
+        <span class="tag1">{{ tag }}</span>
+        {% endfor %}
+        {% if product.variants.size == 1 %}
+        <span class="tag2">add-to-cart</span>
+        {% endif %}
+        <span class="tag3"></span>
+        <span class="date_published">{{product.published_at | date:'%Y-%m-%d'}}</span>
+    </div>
+{% endif %}
+
+{% if collection %}
+    <div class="nosto_category" style="display:none">{{ collection.title }}</div>
+{% endif %}
+
+{% if search.performed %}
+    <div class="nosto_search_term" style="display:none">{{ search.terms }}​​​</div>
+{% endif %}
+
+{% if cart %}
+    <div class="nosto_external_visit_ref" style="display:none"></div>
+    <script type="text/javascript">
+        var ctoken = (document.cookie.match('(^|; )cart=([^;]*)')||0)[2];
+        if (ctoken) {
+            document.getElementsByClassName('nosto_external_visit_ref')[0].textContent = ctoken;
+        }
+    </script>
+    <div class="nosto_cart" style="display:none">
+        {% for line_item in cart.items %}
+        <div class="line_item">
+            <span class="product_id">{{ line_item.product.id }}</span>
+            <span class="quantity">{{ line_item.quantity }}</span>
+            <span class="name">{{ line_item.title }}</span>
+            <span class="unit_price">{{ line_item.price | money_without_currency | remove: ',' }}</span>
+            <span class="price_currency_code">{{ shop.currency }}</span>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% if customer %}
+    <div class="nosto_customer" style="display:none">
+        <span class="email">{{ customer.email }}</span>
+        <span class="first_name">{{ customer.first_name }}</span>
+        <span class="last_name">{{ customer.last_name }}</span>
+    </div>
+{% endif %}

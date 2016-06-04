@@ -1,0 +1,343 @@
+<div class="container" role="main">
+    <header role="main">
+        <h1> Shopping Bag </h1>
+    </header>
+
+    <div class="page-container">
+        <div id="cart" class="row-fluid">
+            {% comment %}
+            START CART
+            {% endcomment %}
+
+            {% if cart.item_count > 0 %}
+
+            <script type="text/javascript">
+            function _conv_copy_cookies(form) {
+            try {
+            var _conv_v = encodeURIComponent(convert.getCookie("_conv_v"));
+            var _conv_s = encodeURIComponent(convert.getCookie("_conv_s"));
+
+            form.action ='/cart?_conv_v='+ _conv_v + '&_conv_s='+ _conv_s ;
+            } catch(e) {}
+            return true;
+            }
+            </script>
+
+            <form id="update-cart" action="/cart" method="post" style="clear:both;" onsubmit="return _conv_copy_cookies(this)">
+                <div class="line-items span9">
+                    <table id="cart-detail">
+                        <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th class="cart-item-description-header">Description</th>
+                            <th class="cart-item-price-header">Price</th>
+                            <th class="cart-item-quantity-header">Qty</th>
+                            <th class="cart-item-total-header">Total</th>
+                            <th class="cart-item-delete-header"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="line_items">
+
+                            {% assign c_items = '' %}
+                            {% for item in cart.items %}
+
+                            {% capture c_items %}
+                            {{ c_items }}{{ item.product.id }}|
+                            {% endcapture %}
+
+                            {% comment %}
+                            Determining the handle of the collection that was last seen for the 'continue shopping' link.
+                            {% endcomment %}
+
+                            {% if forloop.first %}
+                            {% assign collection_url = item.product.collections.first.url %}
+                            {% if collection_url == '/collections/frontpage' or collection_url == '' %}{% assign collection_url = '/collections/all' %}{% endif %}
+                            {% endif %}
+
+                            <tr>
+                                <td class="cart-item-image">
+                                    <a href="{{ item.product.url | within: collections.all }}">
+                                        <img src="{{ item.product.featured_image.src | product_img_url: 'small' }}" alt="{{ item.title | escape }}" />
+                                    </a>
+                                </td>
+                                <td class="cart-item-description">
+                                    <a href="{{ item.product.url | within: collections.all }}">
+                                        <span class="short_name">
+                                            {{ item.product.metafields.c_f.short_name }}
+                                        </span>
+
+                                        <span class="long_name">
+
+                                            {{ item.product.title }}
+                                        </span>
+
+                                        <span class="materials">
+                                            {{ item.product.metafields.c_f.product_material }} {{ item.product.metafields.c_f.colorway }}
+                                        </span>
+
+                                        <span class="size">
+                                            Size: {{ item.variant.option1 }}
+                                        </span>
+
+										{% if item.variant.option2 and item.product.options[1] != 'BuyXDiscount' %}
+										<span class="size">
+											{{ item.product.options[1] }}: {{ item.variant.option2 }}
+											</span>
+										{% endif %}
+
+                                    </a>
+                                    {% comment %}
+                                    Line Item Properties
+                                    {% endcomment %}
+                                    {% if item.properties.size > 0 %}
+                                    <p>
+                                        {% for p in item.properties %}
+                                        {% unless p.last == blank %}
+                                        {{ p.first }}:
+                                        {% if p.last contains '/uploads/' %}
+                                        <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                                        {% else %}
+                                        {{ p.last }}
+                                        {% endif %}
+                                        <br />
+                                        {% endunless %}
+                                        {% endfor %}
+                                    </p>
+                                    {% endif %}
+                                </td>
+                                <td class="cart-item-total">
+                                    {% if item.variant.compare_at_price > item.variant.price %}
+                                    <span class="selling original_price">{{ item.variant.compare_at_price_max | money  | remove: " "}}</span>
+                                    <span class="selling sale_price">{{ item.variant.price | money  | remove: " "}}</span>
+                                    {% else %}
+                                    <span class="selling">{{ item.variant.price | money  | remove: " "}}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="cart-item-quantity">
+                                    <input type="number" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" />
+                                </td>
+                                <td class="cart-item-total">
+                                    {{ item.line_price | money }}
+                                </td>
+                                <td class="cart-item-delete">
+                                    <a class="cart_item_delete" href="/cart/change?line={{ forloop.index }}&quantity=0">×</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="row-fluid gift-tick">
+                        <input type="hidden" name="attributes[Order is a gift?]" value="No">
+                        <input type="checkbox" name="attributes[Order is a gift?]" class="is-gift" id="is-gift" value="Yes"><label for="is-gift">Is this purchase a gift?</label>
+                    </div>
+
+                    <div class="row-fluid promo-code">
+
+                        <div class="span8">
+                            <a class="continue button gray" href="http://seavees.com/">Continue shopping</a>
+                        </div>
+
+                        <div class="span4 form-horizontal">
+                            <input type="submit" class="update-cart" name="update" value="Update cart" />
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="span3 sidebar width-fix">
+                    <div class="tile step final summary span3">
+                        <h3>Summary</h3>
+
+                        <table cellspacing="0">
+                            <tbody>
+                                <tr>
+                                    <th>Subtotal</th>
+                                    <td>{{ cart.total_price | money }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="summary-total">Total</th>
+                                    <td class="summary-total">{{ cart.total_price | money }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <input type="submit" name="checkout" class="btn btn-primary checkout-button" value="Checkout" />
+                        <div class="gcb">
+                            <img src="//secure.globalcheckout.com/js/GlobalDelivery.jpg" onclick="globalcheckout()">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            {% if settings.upsell_tag %}
+
+            {% assign has_upsells = false %}
+
+            {% paginate collections.all.products by 1000 %}
+            {% for product in collections.all.products %}
+                {% if product.tags contains settings.upsell_tag %}
+                    {% assign has_upsells = true %}
+                    {% capture u_item %}{{ product.id }}{% endcapture %}
+                    {% if c_items contains u_item %}
+                    {% assign has_upsells = false %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% endpaginate %}
+
+            <div class="row-fluid">
+              <div class="span9">
+                <div class="buyx-msg"></div>
+                {% include 'buyx-cart' %}
+              </div>
+            </div>
+
+            {% if settings.display_feature %}
+            {% if has_upsells == true %}
+            <div class="row-fluid">
+                <div class="span9 cart-feature">
+
+                    <h2>{{ settings.upsell_text }}</h2>
+
+                    {% paginate collections.all.products by 1000 %}
+                    {% for product in collections.all.products %}
+                    {% if product.tags contains settings.upsell_tag %}
+
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <a href="{{ product.url }}">
+                                <img src="{{ product.featured_image.src | product_img_url: 'compact' }}" alt="{{ product.featured_image.alt | escape }}" />
+                            </a>
+                        </div>
+
+                        <div class="span5 description">
+                            <a href="{{ product.url }}">
+                                {{ product.title }}
+                            </a>
+                        </div>
+
+                        <div class="span2 price">
+                            {% if product.compare_at_price > product.price %}
+                            <span class="selling original_price">{{ product.compare_at_price_max | money }}</span>
+                            <span class="selling sale_price">{{ product.price | money }}</span>
+                            {% else %}
+                            <span class="selling">{{ product.price | money }}</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="span3">
+                            <form accept-charset="UTF-8" action="/cart/add" method="post">
+                                {% for variant in product.variants %}
+                                    {% if variant.inventory_quantity >= 1 %}
+                                    <input type="hidden" name="id" value="{{ variant.id }}"/>
+                                    {% endif %}
+                                {% endfor %}
+                                <button id="add" type="submit">Add to Bag</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                    {% endfor %}
+                    {% endpaginate %}
+
+                </div>
+            </div><!-- cart feature -->
+            {% endif %}
+            {% endif %}
+
+            {% endif %}
+
+
+
+
+            {% else %}
+
+                <div class="line-items span9">
+
+                    <div class="empty-cart">
+                        <p>You have no items in your shopping bag.</p>
+                    </div>
+
+                    <div data-hook="" id="empty-cart">
+                        <a class="continue button gray" href="/collections/all">Continue shopping</a>
+                    </div>
+
+                </div>
+
+            {% endif %}
+            {% comment %}
+            END CART
+            {% endcomment %}
+        </div>
+    </div>
+</div>
+
+
+<div class="globalcheckout">
+  <form id="globalcheckoutform" method="post" action="https://secure.globalcheckout.com/global-check-out.do">
+
+  {% for item in cart.items %}
+
+    <input type="hidden" value="{{ shop.url }}{{ item.url }}" name="url{{ forloop.index }}">
+    <input type="hidden" value="http:{{ item.product.featured_image.src | product_img_url: 'small' }}" name="prodimage{{ forloop.index }}">
+    <input type="hidden" value="{{ item.title | escape }}" name="prodname{{ forloop.index }}">
+    <input type="hidden" value="{{ item.quantity | escape }}" name="prodnumb{{ forloop.index }}">
+    <input type="hidden" value="{{ item.price | money_without_currency }}" name="unitprice{{ forloop.index }}">
+    <input type="hidden" value="{{ item.grams | divided_by: 1000 | round: 1 }}" name="actualweight{{ forloop.index }}">
+    
+    <!-- DISCOUNT -->
+    <input type="hidden" name="promoCode" id="promoCode" value="TESTING">
+    <input type="hidden" name="discount" value="50%">
+    <input type="hidden" name="discountType" value="Y">
+    <input type="hidden" name="startDate" value="2016-01-04">
+    <input type="hidden" name="endDate" value="2016-01-30">
+    <!-- END DISCOUNT -->
+
+    {% assign shoe = false %}
+    {% for tag in item.product.tags %}
+        {% if shoe == false and tag contains 'Box Dimensions:' %}
+            {% assign box = tag | remove: 'Box Dimensions: ' | split: 'x' %}
+            {% assign vw = box[0] | times: box[1] | times: box[2] | divided_by: 305.12 | round: 1 %}
+            {% assign shoe = true %}
+        {% endif %}
+    {% endfor %}
+    {% if shoe %}
+        <input type="hidden" value="{{ vw }}" name="volumetricweight{{ forloop.index }}">
+    {% endif %}
+
+    {% capture length %}{{ forloop.length }}{% endcapture %}
+
+  {% endfor %}
+
+    <input type="hidden" name="itemNumber" value="{{ length }}">
+    <input type="hidden" name="domestichandling" value="0">
+    <input type="hidden" name="merchant" value="{{ shop.url }}">
+    <input type="hidden" name="merchantShoppingCart" value="{{ shop.url }}/cart">
+    
+    <!-- <input type="image" src="http://www.globalcheckout.com/js/GlobalDelivery.jpg" alt="Click to ship internationally with Global Checkout"> -->
+  </form>
+<script>
+  function globalcheckout(){
+    // update quantity for each item before sending
+    $("input[name*=updates]").each( function( i, el ){
+        $("#globalcheckoutform input[name=prodnumb" + (i+1) + "]").attr( "value", el.value );
+    });
+    $("#globalcheckoutform").submit();
+  }
+</script>
+</div>
+<script>
+  if (typeof BuyXSubmit == "function") {
+    var buyx_checkout_selectors = ["input[name='checkout']", "button[name='checkout']", "input[name='goto_pp']", "button[name='goto_pp']", "input[name='goto_gc']", "button[name='goto_gc']", "[href$='checkout']"];
+    window.buyx_cart_global = {{ cart | json }}
+    buyx_checkout_selectors.forEach(function(selector) {
+        jQuery(selector).bind("click", function() {
+          console.log("click")
+            return BuyXSubmit(window.buyx_cart_global, "#updates_{variant_id}");
+        })
+    });
+  }
+</script>

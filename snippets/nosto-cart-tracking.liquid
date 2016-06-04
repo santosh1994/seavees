@@ -1,0 +1,22 @@
+<!-- Nosto Ref start -->
+<input type="hidden" id="nostoref" name="attributes[nostoref]" value="" />
+<script>
+  (function() {
+    var cookies = document.cookie.split('; ');
+    var nostoCustomerId = "";
+    for ( var i = 0, l = cookies.length; i < l; i++) {
+      var parts = cookies[i].split('=');
+      var key = parts[0];
+      var val = parts[1];
+      if (key === '2c.cId') {
+        nostoCustomerId = val;
+      }
+    }
+    document.getElementById('nostoref').value = nostoCustomerId;
+    Shopify.updateCartAttributes({
+      'nostoref' : nostoCustomerId 
+        }, function() {}
+    );
+  })();
+</script>
+<!-- Nosto Ref end -->

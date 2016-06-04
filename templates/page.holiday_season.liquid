@@ -1,0 +1,99 @@
+<!-- TESTING STYLESHEET -->
+{{ 'theme.12-deals-12-days.css' | asset_url | stylesheet_tag }}
+
+<div id="holiday-season">
+  <div id="holiday-hero"></div>
+  <div id="holiday-hero-mobile">
+    <img src="{{ '12days-hero-mobile.jpg' | asset_url  }}"/>
+  </div>
+  <div class="container">
+    <div id="feature-number">
+      <img src="{{ '12days-number-banner.png' | asset_url  }}"/>
+    </div>
+    <div id="feature-product">
+      <img src="{{ '12days-feature-banner.png' | asset_url  }}"/>
+    </div>
+
+    <h3 id="discount-text">{{ settings.12days-discount-text }}</h3>
+
+    <div id="shop-buttons">
+      <a class="shop-mens" href="{{ settings.12days-shop-mens-link }}">{{ settings.12days-shop-mens-text }}</a>
+      <a class="shop-womens" href="{{ settings.12days-shop-womens-link }}">{{ settings.12days-shop-womens-text }}</a>
+    </div>
+
+    <p id="disclaimer-text">{{ settings.12days-disclaimer-text }}</p>
+
+    <ul id="deals">
+      <li {% if settings.12days-deal-1-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-1.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-1-link and settings.12days-deal-1-activate %}<a href="{{ settings.12days-deal-1-link }}">1</a>{% else %}1{% endif %}</span>
+        </div>
+      </li>
+      <li {% if settings.12days-deal-2-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-2.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-2-link and settings.12days-deal-2-activate %}<a href="{{ settings.12days-deal-2-link }}">2</a>{% else %}2{% endif %}</span>
+        </div>  
+      </li>
+      <li {% if settings.12days-deal-3-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-3.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-3-link and settings.12days-deal-3-activate %}<a href="{{ settings.12days-deal-3-link }}">3</a>{% else %}3{% endif %}</span>
+        </div>
+      </li>
+      <li {% if settings.12days-deal-4-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-4.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-4-link and settings.12days-deal-4-activate %}<a href="{{ settings.12days-deal-4-link }}">4</a>{% else %}4{% endif %}</span>
+        </div>  
+      </li>
+      <li {% if settings.12days-deal-5-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-5.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-5-link and settings.12days-deal-5-activate %}<a href="{{ settings.12days-deal-5-link }}">5</a>{% else %}5{% endif %}</span>
+        </div>
+      </li>
+      <li {% if settings.12days-deal-6-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-6.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-6-link and settings.12days-deal-6-activate %}<a href="{{ settings.12days-deal-6-link }}">6</a>{% else %}7{% endif %}</span>
+        </div>
+      </li>      
+      <li {% if settings.12days-deal-7-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-7.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-7-link and settings.12days-deal-7-activate %}<a href="{{ settings.12days-deal-7-link }}">7</a>{% else %}6{% endif %}</span>
+        </div>  
+      </li>
+
+      <li {% if settings.12days-deal-8-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-8.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-8-link and settings.12days-deal-8-activate %}<a href="{{ settings.12days-deal-8-link }}">8</a>{% else %}8{% endif %}</span>
+        </div>  
+      </li>
+      <li {% if settings.12days-deal-9-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-9.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-9-link and settings.12days-deal-9-activate %}<a href="{{ settings.12days-deal-9-link }}">9</a>{% else %}9{% endif %}</span>
+        </div>
+      </li>
+      <li {% if settings.12days-deal-10-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-10.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-10-link and settings.12days-deal-10-activate %}<a href="{{ settings.12days-deal-10-link }}">10</a>{% else %}10{% endif %}</span>
+        </div>  
+      </li>
+      <li {% if settings.12days-deal-11-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-11.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-11-link and settings.12days-deal-11-activate %}<a href="{{ settings.12days-deal-11-link }}">11</a>{% else %}11{% endif %}</span>
+        </div>
+      </li>
+      <li {% if settings.12days-deal-12-activate %}class="active"{% endif %} >
+        <div class="wrap" style="background-image:url( {{ '12days-deal-12.png' | asset_url }} )">
+          <span>{% if settings.12days-deal-12-link and settings.12days-deal-12-activate %}<a href="{{ settings.12days-deal-12-link }}">12</a>{% else %}12{% endif %}</span>
+        </div>  
+      </li>      
+    </ul>
+
+    <div id="foot-shipping">
+      <p class="free-shipping">{{ settings.12days-shipping-text }}</p>
+      <hr>
+      <h1>{{ settings.12days-shipping-heading }}</h1>
+      <p class="shipping-deadline">{{ settings.12days-shipping-summary }}</p>
+      <hr>
+    </div>
+  </div>
+
+</div>

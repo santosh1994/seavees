@@ -1,0 +1,42 @@
+<script>
+(function(){
+  var template = {{ template | json }};
+  try {
+    if (template.indexOf('product') == 0) {
+      var prodid = {{ product.id | json }};
+      var totalvalue = {{ product.price | money_without_currency | json }};
+      dataLayer.push({
+        'event': 'fireRemarketingTag',
+        'google_tag_params': {
+          'ecomm_prodid': prodid,
+          'ecomm_pagetype': 'product',
+          'ecomm_totalvalue': totalvalue
+        }
+      });
+    }
+    else if (template == 'cart') {
+      var prodid = {{ cart.items | map: 'id' | json }};
+      var totalvalue = {{ cart.total_price | money_without_currency | json }};
+      /*
+      Insert custom JS code to extract value of
+      prodid and totalvalue from current document
+      */
+      dataLayer.push({
+        'event': 'fireRemarketingTag',
+        'google_tag_params': {
+          'ecomm_prodid': prodid,
+          'ecomm_pagetype': 'cart',
+          'ecomm_totalvalue': totalvalue
+        }
+      });
+    }
+    else {
+      dataLayer.push({
+        'event': 'fireRemarketingTag',
+        'google_tag_params': { }
+      });
+    }
+  }
+  catch (err) {}
+}) ();
+</script>

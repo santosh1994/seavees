@@ -1,0 +1,413 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
+
+    <title>
+    {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+    </title>
+
+    <link rel="icon" href="https://cdn.shopify.com/s/files/1/0862/4628/t/2/assets/favicon.gif?5876435363712098755">
+
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+    {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}" />
+    {% endif %}
+
+    <link rel="canonical" href="{{ canonical_url }}" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta name="google-site-verification" content="4tfTisVDhBu5yED4ARTAbU_EHU-9CgVv3r0Ko4_LIRM" />
+
+    <meta name="google-site-verification" content="myqX4xh-eBg7D0IufdvdMpWGGi70-eQ0TPS3s8_rWzE" />
+
+    <meta name="google-site-verification" content="El8iNYDEY_yMKVb5xlgBcm6WCMk1INDrhODMs9-OSH0" />
+
+    <link href='http://fonts.googleapis.com/css?family=Amatic+SC|Crimson+Text' rel='stylesheet' type='text/css'>
+
+    <link href="https://plus.google.com/+Seavees_bornin1964" rel="publisher" />
+
+    {% include 'open-graph-tags' %}
+
+    {{ content_for_header }}
+
+    {{ 'seavees.css' | asset_url | stylesheet_tag }}
+    {{ 'bootstrap.css' | asset_url | stylesheet_tag }}
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ 'apple-touch-icon-144-precomposed.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ 'apple-touch-icon-114-precomposed.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ 'apple-touch-icon-72-precomposed.png' | asset_url }}">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ 'apple-touch-icon-57-precomposed.png' | asset_url }}">
+
+    <!--[if lt IE 9]>
+    {{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
+    <![endif]-->
+
+    {% if template contains 'customers' %}
+    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+    {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+    {% endif %}
+
+    {% comment %}
+    Needed when shopify_common.js is used.
+    {% endcomment %}
+    <!--[if lt IE 8]>
+    {{ 'json2.js' | shopify_asset_url | script_tag }}
+    <![endif]-->
+
+    {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+    {{ '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js' | script_tag }}
+    {{ 'api.jquery.js' | shopify_asset_url | script_tag }}
+
+    {% if template == 'index' %}{{ 'jquery.index.js' | asset_url | script_tag }}{% endif %}
+
+    <!-- begin Convert Experiments code--><script type="text/javascript">
+     var _conv_page_type = "{% if template == 'index' %}homepage{% else template == "collections" %}collection{% else template == "article" %}article{% else template == "product" %}product{% else template == "cart" %}cart{% else %}other{% endif %}";
+     var _conv_category_id = "";
+     var _conv_category_name = "{{ collection.title }}";
+     var _conv_product_sku = "";
+     var _conv_product_name = "{{ product.title }}";
+     var _conv_product_price = "{{ product.compare_at_price_min | money }}";
+     var _conv_customer_id = "";
+     var _conv_custom_v1 = "{{ tag }}";
+     var _conv_custom_v2 = "{{ order.shipping_address.province }}";
+     var _conv_custom_v3 = "{{ cart.item_count }}";
+     var _conv_custom_v4 = "{{ cart.total_price | money }}";
+
+    var _conv_host = (("https:" == document.location.protocol) ? "https://d9jmv9u00p0mv.cloudfront.net" : "http://cdn-1.convertexperiments.com");document.write(unescape("%3Cscript src='" + _conv_host + "/js/10014300_10013673.js' type='text/javascript'%3E%3C/script%3E"));</script>
+    <!-- end Convert Experiments code -->
+
+    <!-- begin Convert Experiments code--><script type="text/javascript">var _conv_host = (("https:" == document.location.protocol) ? "https://d9jmv9u00p0mv.cloudfront.net" : "http://cdn-1.convertexperiments.com");document.write(decodeURIComponent("%3Cscript src='" + _conv_host + "/js/10014300-10013673.js' type='text/javascript'%3E%3C/script%3E"));</script><!-- end Convert Experiments code -->
+
+ 	<meta name="google-site-verification" content="El8iNYDEY_yMKVb5xlgBcm6WCMk1INDrhODMs9-OSH0" />
+
+    <!-- Start of seaveessupport Zendesk Widget script -->
+<script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(c){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var o=this.createElement("script");n&&(this.domain=n),o.id="js-iframe-async",o.src=e,this.t=+new Date,this.zendeskHost=t,this.zEQueue=a,this.body.appendChild(o)},o.write('<body onload="document._l();">'),o.close()}("https://assets.zendesk.com/embeddable_framework/main.js","seaveessupport.zendesk.com");/*]]>*/</script>
+<!-- End of seaveessupport Zendesk Widget script -->
+
+    {% if page.handle == '/pages/lookbook-test' %}{% layout none %}{% endif %}
+
+
+</head>
+
+<body {% if template == 'index' %}class="home page"{% endif %} id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} {{ page.handle }}" >
+
+    <div class="ui vertical sidebar menu inverted right visible-phone">
+        <a class="item js-menu-mobile">
+            &times;
+        </a>
+        <!--MOBILE NAV HERE-->
+    </div>
+
+    <div class="container-wrapper">
+
+
+        <!--@SLTWTRSPLIT-->
+        <header id="page_header" class="fixed-header">
+
+            {% include 'global_bar' %}
+
+            <div class="main-navigation">
+                <div class="container">
+                    <ul class="mobile-header visible-phone">
+                        <li class="menu-open">
+                            <button class="navbar-toggle collapsed" data-target=".mobile-nav" data-toggle="collapse" type="button">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </li>
+                        <li class="mobile-logo">
+                            <a href="http://seavees.com"></a>
+                        </li>
+                        <li class="cart">
+                            <a href="http://shop.seavees.com/cart" id="cart_link"></a>
+                        </li>
+                    </ul>
+                    <div class="row-fluid">
+                        <ul class="nav mobile-nav span8">
+                            <li class="logo">
+                                <a href="http://seavees.com">SeaVees</a>
+                            </li>
+                            <li class="search js-search-trigger visible-phone">
+                                <form role="search" class="search-form form-inline" method="get" action="http://shop.seavees.com/search">
+                                    <input type="text" class="hint" placeholder="Search..." id="search-field" name="q">
+                                    <button class="btn" value="Search" id="search-submit" type="submit"><i class="icon-search icon-white"></i></button>
+                                </form>
+                            </li>
+                            {% for link in linklists.main-menu.links %}
+                            {% assign has_sub_menu = false %}
+                            {% assign has_sub_categories = false %}
+                            {% assign parent_link_active = false %}
+                            {% assign child_list_handle = link.title | handle %}
+                            {% if linklists[child_list_handle] and linklists[child_list_handle].links.size > 0 %}
+                                {% assign has_sub_menu = true %}
+                                {% for l in linklists[child_list_handle].links %}
+                                    {% if page_title == l.title %}
+                                        {% assign parent_link_active = true %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% elsif link.type == 'collection_link' and link.object.all_tags.size > 0 %}
+                                {% assign has_sub_categories = true %}
+                            {% endif %}
+                            <li class="js-dropdown-trigger">
+                              <a {% if link.title contains 'Sale' %}style="color:#46b3e5;"{% endif %} href="{{ link.url }}">{{ link.title }}</a>
+                                {% if has_sub_menu or has_sub_categories %}
+                                <ul class="dropdown-menu">
+                                    <li class="sub-nav-niblet"></li>
+                                    {% if has_sub_menu %}
+                                        {% for l in linklists[child_list_handle].links %}
+                                        <li class="sub-nav-item">
+                                            <a class="{% if forloop.first %}first{% elsif forloop.last %}last{% endif %}" href="{{ l.url }}">{{ l.title }}</a>
+                                        </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                </ul>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <ul class="span4 hidden-phone right-nav">
+                            <li><a href="/cart" class="bag">Your Bag {% if cart.item_count > 0 %}({{ cart.item_count }}){% endif %}</a></li>
+                            <li><a href="/account">Log In</a></li>
+                            <li class="search js-search-trigger">
+                                <a>Search</a>
+                                <form action="/search" method="get" class="search-form form-inline" role="search">
+                                    <input name="q" type="text" id="search-field" placeholder="Search..." class="hint">
+                                    <button type="submit" id="search-submit" value="Search" class="btn"><i class="icon-search icon-white"></i></button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <!--@SLTWTRSPLIT-->
+
+        <div id="main" role="main">
+            {% comment %}}
+            We have a template file to render.
+            That's what content_for_layout is for.
+            {% endcomment %}
+            {{ content_for_layout }}
+        </div>
+        
+        {% if page.handle contains 'lookbook' %}
+            {% include 'lookbook' %} 
+        {% endif %}
+      
+      <!--@SLTWTRSPLIT-->
+
+        <footer id="page_footer">
+            <div class="container-fluid">
+                <div class="container branding">
+                    <div class="row-fluid">
+                        <div class="span12 branding">
+                            <!--TODO: Replace this with settings thingy -->
+                            {{ settings.footer_branding_text }}
+                        </div>
+                    </div>
+                </div>
+                <div class="container logo_bar">
+                    <div class="container">
+                        <div class="row-fluid">
+                            <div class="span6 logo hidden-phone">
+                                <a href="http://seavees.com"></a>
+                            </div>
+                            <div class="span6 social-links">
+                                <a title="Instagram" target="_blank" class="icon-instagram first" href="http://instagram.com/seavees">Instagram</a>
+                                <a title="Facebook" target="_blank" class="icon-facebook" href="https://www.facebook.com/SeaVees">Facebook</a>
+                                <a title="Twitter" target="_blank" class="icon-twitter" href="https://twitter.com/seavees">Twitter</a>
+                                <a title="Spotify" target="_blank" class="icon-spotify" href="http://open.spotify.com/user/seavees">Twitter</a>
+                                <a title="Vimeo" target="_blank" class="icon-vimeo" href="http://vimeo.com/seavees">Vimeo</a>
+                                <a title="Pinterest" target="_blank" class="icon-pinterest last" href="http://www.pinterest.com/seavees">Pinterest</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container link-lists">
+                    <div class="container">
+                        <div class="row-fluid link-lists">
+                            <div class="span6 newsletter">
+                                <div class="row-fluid">
+                                    <div class="span8 offset4">
+                                        <h2>Join Our Mailing List</h2>
+                                        <form action="http://seavees.us1.list-manage.com/subscribe/post?u=30ef7a3d4691eecaff7bb445a&amp;id=4d7af27b73" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                                            <div id="mc_embed_signup_scroll">
+                                                <button type="submit"></button>
+                                                <div class="input_wrap">
+                                                    <input type="email" value="" name="EMAIL" checked="checked" class="email" id="mce-EMAIL" placeholder="{{ settings.footer_email_link }}" required>
+                                                </div>
+                                                <input type="checkbox" value="4096" name="group[57][4096]" id="mce-group[57]-57-0" checked="checked" style="display:none">
+                                                <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                                <div style="position: absolute; left: -5000px;"><input type="text" name="b_30ef7a3d4691eecaff7bb445a_4d7af27b73" tabindex="-1" value=""></div>
+                                                <div class="clear" style="display: none;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6 link-lists">
+                                <div class="row-fluid">
+                                    <ul class="span4">
+                                        <h2>Customer Care</h2>
+                                        {% for link in linklists.footer-left.links %}
+                                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                    <ul class="span4">
+                                        <h2>Discover Seavees</h2>
+                                        {% for link in linklists.footer.links %}
+                                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                    <ul class="span4">
+                                        <h2>Get in Touch</h2>
+                                        {% for link in linklists.footer-right.links %}
+                                        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span12">
+                              <div class="copyright">
+                                <span class="text">&copy; {{ 'now' | date: "%Y" }} Seavees. All Rights Reserved.</span>
+                                <span style="display: inline-block; width: 85px; height: 35px;">
+                                  <?xml version="1.0" encoding="utf-8"?>
+                                  <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                  	 viewBox="0 0 285 123" style="enable-background:new 0 0 285 123;" xml:space="preserve">
+                                  <style type="text/css">
+                                  	.st0{fill:#999;}
+                                  </style>
+                                  <g>
+                                  	<g>
+                                  		<circle class="st0" cx="103.4" cy="67.1" r="2.8"/>
+                                  		<path class="st0" d="M89.4,52.7c0-1.6-1.3-2.8-2.8-2.8c-1.6,0-2.8,1.3-2.8,2.8c0,1.6,1.3,2.8,2.8,2.8
+                                  			C88.1,55.6,89.4,54.3,89.4,52.7z"/>
+                                  		<path class="st0" d="M63,4.4C31.4,4.4,5.7,30,5.7,61.6c0,31.6,25.6,57.2,57.2,57.2c31.6,0,57.3-25.6,57.3-57.2
+                                  			C120.2,30,94.6,4.4,63,4.4z M74.5,106.2H52.2V37L43.9,37l0.1-11.2l10.8-9.6h19.8V106.2z M80.1,52.7c0-3.6,2.9-6.4,6.4-6.4
+                                  			c3.6,0,6.4,2.9,6.4,6.4c0,3.5-2.9,6.4-6.4,6.4C83,59.2,80.1,56.3,80.1,52.7z M82.7,73.6l20-27.4h4.7l-20,27.4H82.7z M103.4,73.6
+                                  			c-3.6,0-6.4-2.9-6.4-6.4c0-3.6,2.9-6.4,6.4-6.4c3.5,0,6.4,2.9,6.4,6.4C109.8,70.7,106.9,73.6,103.4,73.6z"/>
+                                  	</g>
+                                  	<g>
+                                  		<polygon class="st0" points="131.6,37.2 150.4,37.2 150.4,42.9 138.1,42.9 138.1,46.9 149.2,46.9 149.2,52.3 138.1,52.3
+                                  			138.1,60.7 131.6,60.7 		"/>
+                                  		<path class="st0" d="M152.7,49L152.7,49c0-6.8,5.4-12.3,12.7-12.3c7.2,0,12.6,5.4,12.6,12.1v0.1c0,6.7-5.4,12.2-12.7,12.2
+                                  			C158,61.1,152.7,55.7,152.7,49z M171.3,49L171.3,49c0-3.5-2.4-6.4-6-6.4c-3.6,0-5.9,2.9-5.9,6.3v0.1c0,3.4,2.4,6.3,6,6.3
+                                  			C168.9,55.3,171.3,52.4,171.3,49z"/>
+                                  		<path class="st0" d="M181.5,37.2h11.1c3.6,0,6.1,0.9,7.6,2.5c1.4,1.3,2.1,3.2,2.1,5.5v0.1c0,3.6-1.9,6-4.8,7.2l5.6,8.2h-7.5
+                                  			l-4.7-7.1h-0.1H188v7.1h-6.5V37.2z M192.3,48.5c2.2,0,3.5-1.1,3.5-2.8v-0.1c0-1.8-1.3-2.8-3.5-2.8H188v5.6H192.3z"/>
+                                  		<polygon class="st0" points="217.8,42.9 210.8,42.9 210.8,37.2 231.3,37.2 231.3,42.9 224.3,42.9 224.3,60.7 217.8,60.7 		"/>
+                                  		<polygon class="st0" points="234.4,37.2 240.9,37.2 240.9,46 249.2,46 249.2,37.2 255.7,37.2 255.7,60.7 249.2,60.7 249.2,51.8
+                                  			240.9,51.8 240.9,60.7 234.4,60.7 		"/>
+                                  		<polygon class="st0" points="260.1,37.2 278.9,37.2 278.9,42.7 266.5,42.7 266.5,46.3 277.8,46.3 277.8,51.4 266.5,51.4
+                                  			266.5,55.1 279.1,55.1 279.1,60.7 260.1,60.7 		"/>
+                                  		<path class="st0" d="M131.4,65.4h10.8c6.4,0,10.5,3.3,10.5,8.9v0.1c0,6-4.6,9.1-10.9,9.1h-3.5v7.2h-7V65.4z M141.7,77.9
+                                  			c2.5,0,4-1.3,4-3.3v-0.1c0-2.2-1.5-3.3-4-3.3h-3.3v6.7H141.7z"/>
+                                  		<polygon class="st0" points="155.7,65.4 162.7,65.4 162.7,84.5 174.9,84.5 174.9,90.6 155.7,90.6 		"/>
+                                  		<path class="st0" d="M186.7,65.2h6.8l10.8,25.5h-7.5l-1.8-4.5h-9.7l-1.8,4.5h-7.4L186.7,65.2z M192.8,80.7l-2.8-7.2l-2.9,7.2
+                                  			H192.8z"/>
+                                  		<polygon class="st0" points="206.6,65.4 213.2,65.4 223.6,78.7 223.6,65.4 230.5,65.4 230.5,90.6 224.4,90.6 213.6,76.8
+                                  			213.6,90.6 206.6,90.6 		"/>
+                                  		<polygon class="st0" points="235,65.4 255.3,65.4 255.3,71.3 241.9,71.3 241.9,75.2 254,75.2 254,80.7 241.9,80.7 241.9,84.7
+                                  			255.5,84.7 255.5,90.6 235,90.6 		"/>
+                                  		<polygon class="st0" points="265.2,71.5 257.7,71.5 257.7,65.4 279.8,65.4 279.8,71.5 272.2,71.5 272.2,90.6 265.2,90.6 		"/>
+                                  		<path class="st0" d="M273.2,90l0.5-0.6c0.3,0.2,0.7,0.4,1,0.4c0.2,0,0.4-0.1,0.4-0.2v0c0-0.1-0.1-0.2-0.5-0.3
+                                  			c-0.7-0.2-1.2-0.3-1.2-1v0c0-0.6,0.5-1,1.2-1c0.5,0,1,0.1,1.3,0.4l-0.4,0.6c-0.3-0.2-0.6-0.3-0.9-0.3c-0.2,0-0.3,0.1-0.3,0.2v0
+                                  			c0,0.1,0.1,0.2,0.5,0.3c0.7,0.2,1.2,0.4,1.2,1v0c0,0.6-0.5,1-1.3,1C274.1,90.6,273.5,90.4,273.2,90z"/>
+                                  		<polygon class="st0" points="276.3,87.4 277.3,87.4 278,88.6 278.8,87.4 279.7,87.4 279.7,90.5 278.8,90.5 278.8,88.7 278,89.9
+                                  			278,89.9 277.2,88.7 277.2,90.5 276.3,90.5 		"/>
+                                  	</g>
+                                  </g>
+                                  </svg>
+                                </span>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+      
+      <!--@SLTWTRSPLIT-->
+
+        {% comment %}Shopify does not support Internet Explorer 6.{% endcomment %}
+        <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+    </div><!-- end of #container -->
+
+    <script src="//use.typekit.net/kjp2toe.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    {{ 'seavees-unmin.js'  | asset_url | script_tag }}
+
+    {% comment %}<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-533c61cc1c6345dd"></script>{% endcomment %}
+    <!-- analytics -->
+
+    <script type="text/javascript">
+        setTimeout(function(){var a=document.createElement("script");
+        var b=document.getElementsByTagName("script")[0];
+        a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0021/2546.js?"+Math.floor(new Date().getTime()/3600000);
+        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+
+
+    <script>(function() {
+      var _fbq = window._fbq || (window._fbq = []);
+      if (!_fbq.loaded) {
+        var fbds = document.createElement('script');
+        fbds.async = true;
+        fbds.src = '//connect.facebook.net/en_US/fbds.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(fbds, s);
+        _fbq.loaded = true;
+      }
+      _fbq.push(['addPixelId', '848656931852400']);
+    })();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', 'PixelInitialized', {}]);
+    </script>
+
+    <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//script.crazyegg.com/pages/scripts/0021/2546.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+
+    <script type="text/javascript">(function(d) { var e = d.createElement('script'); e.src = d.location.protocol+'//exitintel.com/ei/data/js/load.js?exitintelAccount=189'; e.async = true; e.setAttribute("data-cfasync","false"); d.getElementsByTagName("head")[0].appendChild(e); }(document));
+    </script>
+
+    <!--Start of Zopim Live Chat Script-->
+    <script type="text/javascript"> window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s= d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set. _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8'); $.src='//v2.zopim.com/?2o9Vzx0OHDWbq4P1iPnn1VHu3y3HywgK';z.t=+new Date;$. type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script'); </script>
+    <!--End of Zopim Live Chat Script-->
+
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KHDRFP"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KHDRFP');</script>
+    <!-- End Google Tag Manager -->
+  
+  	{% include 'remarketing-tag' %}
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+
+{% include 'nosto-element' with 'searchpage-nosto-1' %}
+{% comment %}
+The search.liquid template is not a required template.
+That search.liquid template is included in the current theme to make it easier for you 
+to customize your /search page.
+Whether you are using your own template for the search page or not,
+the {{ content_for_header }} tag in theme.liquid will always output the following on the /search page:
+<link rel="stylesheet" href="//cdn.shopify.com/s/global/search.css" type="text/css" />
+So the /search page is always styled by a globally-hosted stylesheet called search.css.
+You may override and complement that CSS in your theme's stylesheet.
+We are using a div#searchresults below so that the styles defined in search.css get
+applied to the elements on this page; the 'searchresults' id is used in the CSS
+selectors inside search.css.
+{% endcomment %}
+
+
+
+
+<div class="container" role="main">
+
+    <header role="main">
+        <h1> Search Results </h1>
+    </header>
+
+    {% if search.performed %}
+
+    <div class="page-container">
+        <div class="product-collection search-results">
+            <h2> Search results for '{{ search.terms }}' </h2>
+            <div id="products" class="product-listing">        
+    
+                {% paginate search.results by 1000 %} 
+                
+                {% comment %}
+                Common pitfall to avoid: search.results should never be accessed before the opening 
+                paginate tag. Move the opening and closing paginate tags to the very top and bottom of your
+                search.liquid template if you need to.
+                If you fail to do the above, the pagination of search results will be broken.
+                search.results_count is fine to access in or out of the paginate block. 
+                {% endcomment %}
+ 
+                {% if search.results_count == 0 %}  
+                <p>Your search for "{{ search.terms }}" did not yield any results.</p>              
+                {% else %}
+
+                <ul class="product-row clearfix">
+
+                {% for item in search.results %}
+
+                <li>
+
+                {% comment %}{% capture thecycle %}{% cycle '1', '2', '3', '4' %}{% endcapture %}
+
+                {% if thecycle == '1' %}<div class="row-fluid">{% endif %}{% endcomment %}
+                      
+                    <div class="product-tile span3" itemtype="http://schema.org/Product">
+                        {% if item.featured_image %}
+                        <div class="product-image">
+                            <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                                {{ item.featured_image.src | product_img_url: 'large' | img_tag: item.featured_image.alt }}
+                            </a>
+                        </div>  
+                        {% endif %}
+                        <div class="product-info">
+                            <div class="name">
+                                <a title="09/66. huarache. leather" href="{{ item.url }}">
+                                    <span class="short_name">{{ item.metafields.c_f.short_name }}</span>
+                                    <span class="long_name">{{ item.title | remove: "Mens - " | remove: "Womens - " }}</span>
+                                    <span class="price">
+                                        {% if on_sale %}
+                                            {% if item.compare_at_price > item.price %}
+                                            <span class="selling original_price">{{ item.compare_at_price | money | remove: ".00" | remove: " "  }}</span>
+                                            {% endif %}
+                                            <span class="selling sale_price">{{ item.price | money | remove: ".00" | remove: " "  }}</span>
+                                            {% else %}
+                                            <span class="selling" itemprop="price">
+                                                {{ item.price | money | remove: ".00" | remove: " " }}
+                                            </span>
+                                        {% endif %}
+                                    </span>
+                                </a>
+
+                                {% assign on_sale = false %}
+                                {% if item.compare_at_price > item.price %}
+                                  {% assign on_sale = true %}
+                                {% endif %}
+
+                                <span class="materials_color on_sale">
+                                    <a class="info" href="{{ item.url }}">{{ item.metafields.c_f.product_material }}</a>
+                                 </span>
+                            </div>
+
+                            {% capture colour_variant %}
+                                {% for variant in item.variants %}
+                                {% for option in variant.options %}
+                                {% if item.options[forloop.index0] == 'Color' %}somestring,{% endif %}
+                                {% endfor %}
+                                {% endfor %}
+                            {% endcapture %}
+
+                            {% assign colour_variant_split = colour_variant | split: 'somestring,' %}
+                            {% assign colour_count = colour_variant_split.size | minus:1 %}
+
+                            {% if colour_count > 1 %}
+                                <p class="availability_note">
+                                    <a href="#">Available in additional colors. </a>
+                                </p>
+                            {% endif %}
+
+                        </div>   
+                    </div>
+                {% comment %}{% if thecycle == '4' or forloop.last %}</div>{% endif %}{% endcomment %}
+                </li>
+
+                {% endfor %}
+
+                </ul>
+    
+                {% endif %}    
+                
+                {% if paginate.pages > 1 %}
+                <div id="pagination">
+                  {{ paginate | default_pagination }}
+                </div>
+                {% endif %}
+
+                </div>
+        
+                {% endpaginate %}  
+            </div>
+        </div>
+    </div>
+        
+    {% endif %}  
+
+</div>
+
+{% include 'nosto-element' with 'searchpage-nosto-2' %}

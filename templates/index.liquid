@@ -1,0 +1,212 @@
+
+{% comment %}
+Re-use the 'rte' class wherever you output content that was added by a merchant using
+the Rich Text Editor ( 'rte' stands for rich text editor ).
+Style all HTML elements in that content the same way across the board.
+Use the 'rte' class in your CSS to help maintain that consistency.
+Example: the h2 element should have the same size and color in:
+- product descriptions
+- collection descriptions
+- 'page' pages' content
+- blog post
+{% endcomment %}
+
+{% if settings.index-show-slideshow == true %}
+<div id="home-slides" class="container hidden-phone">
+    <div class="slides">
+        <div class='home-cycle' data-fx='fade'>
+          	{% if settings.activate_slide_1 %}
+            <div class="slide">
+                <div class="left-slide">
+                    <a href="{{ settings.index-slide-1-a-url }}">
+                        <img src="{{ 'index-slide-1-a.jpg' | asset_url }}">
+                    </a>
+                </div>
+                <div class="right-slide">
+                    <a href="{{ settings.index-slide-1-b-url }}">
+                        <img src="{{ 'index-slide-1-b.jpg' | asset_url }}">
+                    </a>
+                </div>
+            </div>
+          	{% endif %}
+          	{% if settings.activate_slide_2 %}
+            <div class="slide">
+                <div class="left-slide">
+                    <a href="{{ settings.index-slide-2-a-url }}">
+                        <img src="{{ 'index-slide-2-a.jpg' | asset_url }}">
+                    </a>
+                </div>
+                <div class="right-slide">
+                    <a href="{{ settings.index-slide-2-b-url }}">
+                        <img src="{{ 'index-slide-2-b.jpg' | asset_url }}">
+                    </a>
+                </div>
+            </div>
+          	{% endif %}
+            {% if settings.activate_slide_3 %}
+            <div class="slide">
+                <div class="left-slide">
+                    <a href="{{ settings.index-slide-3-a-url }}">
+                        <img src="{{ 'index-slide-3-a.jpg' | asset_url }}">
+                    </a>
+                </div>
+                <div class="right-slide">
+                    <a href="{{ settings.index-slide-3-b-url }}">
+                        <img src="{{ 'index-slide-3-b.jpg' | asset_url }}">
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% if settings.activate_slide_4 %}
+            <div class="slide">
+                <div class="left-slide">
+                    <a href="{{ settings.index-slide-4-a-url }}">
+                        <img src="{{ 'index-slide-4-a.jpg' | asset_url }}">
+                    </a>
+                </div>
+                <div class="right-slide">
+                    <a href="{{ settings.index-slide-4-b-url }}">
+                        <img src="{{ 'index-slide-4-b.jpg' | asset_url }}">
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="navigation">
+            <a class="prev"><span class="arrow-svg"></span></a>
+            <a class="next"><span class="arrow-svg"></span></a>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="mobile-slides">
+    <div class='mobile-cycle visible-phone' data-fx='fade'>
+        {% if settings.activate_slide_1 %}
+        <div class="mobile-slide">
+            <a href="{{ settings.index-slide-1-m-url }}">
+                <img src="{{ 'index-slide-1-m.jpg' | asset_url }}"  />
+                 <div class="mobile-slide-content vertical-align-center">
+                    <h2 style="color:{{ settings.index-slide-1-color-title }};">{{ settings.index-slide-1-title }}</h2>
+                    <h3 style="color:{{ settings.index-slide-1-color-summary }};border-bottom-color:{{ settings.index-slide-1-color-summary }}">{{ settings.index-slide-1-summary }}</h3>
+                </div>
+            </a>
+        </div>
+      	{% endif %}
+        {% if settings.activate_slide_2 %}
+         <div class="mobile-slide">
+            <a href="{{ settings.index-slide-2-m-url }}">
+                <img src="{{ 'index-slide-2-m.jpg' | asset_url }}"  />
+                 <div class="mobile-slide-content vertical-align-center">
+                    <h2 style="color:{{ settings.index-slide-2-color-title }};">{{ settings.index-slide-2-title }}</h2>
+                    <h3 style="color:{{ settings.index-slide-2-color-summary }};border-bottom-color:{{ settings.index-slide-2-color-summary }}">{{ settings.index-slide-2-summary }}</h3>
+                </div>
+            </a>
+        </div>
+      	{% endif %}
+        {% if settings.activate_slide_3 %}
+        {% unless settings.index-slide-3-m-url == blank %}
+         <div class="mobile-slide">
+            <a href="{{ settings.index-slide-3-m-url }}">
+                <img src="{{ 'index-slide-3-m.jpg' | asset_url }}"  />
+                 <div class="mobile-slide-content vertical-align-center">
+                     <h2 style="color:{{ settings.index-slide-3-color-title }};">{{ settings.index-slide-3-title }}</h2>
+                    <h3 style="color:{{ settings.index-slide-3-color-summary }};border-bottom-color:{{ settings.index-slide-3-color-summary }}">{{ settings.index-slide-3-summary }}</h3>
+                </div>
+            </a>
+        </div>
+        {% endunless %}
+      	{% endif %}
+        {% if settings.activate_slide_4 %}
+        {% unless settings.index-slide-4-m-url == blank %}
+         <div class="mobile-slide">
+            <a href="{{ settings.index-slide-4-m-url }}">
+                <img src="{{ 'index-slide-4-m.jpg' | asset_url }}"  />
+                 <div class="mobile-slide-content vertical-align-center">
+                     <h2 style="color:{{ settings.index-slide-4-color-title }};">{{ settings.index-slide-4-title }}</h2>
+                    <h3 style="color:{{ settings.index-slide-4-color-summary }};border-bottom-color:{{ settings.index-slide-4-color-summary }}">{{ settings.index-slide-4-summary }}</h3>
+                </div>
+            </a>
+        </div>
+        {% endunless %}
+      	{% endif %}
+    </div>
+</div>
+
+
+
+<div id="promo-boxes" class="container">
+    <div class="row-fluid">
+        <div class="span4 column">
+            <div class="box journal" style="background-image:url({{ 'index-feature-1.jpg' | asset_url }});">
+                <a href="{{ settings.index-feature-1-url }}">
+                    <span class="title" style="color:{{ settings.index-feature-1-color-title }};">{{ settings.index-feature-1-title }}</span>
+                    <span style="color:{{ settings.index-feature-1-color-summary }};">{{ settings.index-feature-1-summary }}</span>
+                </a>
+            </div>
+            <div class="box product">
+                <div class="cycle" data-fx="scrollHorz">
+                    <a style="background-image: url({{ 'index-feature-2-a.jpg' | asset_url }}); left: 0px;" class="product" href="{{ settings.index-feature-2-a-url }}">
+                        <div class="name">
+                            <span class="short_name">{{ settings.index-feature-2-a-title }}</span>
+                            <span class="long_name">{{ settings.index-feature-2-a-summary }}</span>
+                        </div>
+                    </a>
+                    <a style="background-image: url({{ 'index-feature-2-b.jpg' | asset_url }}); left: 0px;" class="product" href="{{ settings.index-feature-2-b-url }}">
+                        <div class="name">
+                            <span class="short_name">{{ settings.index-feature-2-b-title }}</span>
+                            <span class="long_name">{{ settings.index-feature-2-b-summary }}</span>
+                        </div>
+                    </a>
+                    {% unless settings.index-feature-2-c-url contains 'e.g.' or settings.index-feature-2-c-url == blank %}
+                     <a style="background-image: url({{ 'index-feature-2-c.jpg' | asset_url }}); left: 0px;" class="product" href="{{ settings.index-feature-2-c-url }}">
+                        <div class="name">
+                            <span class="short_name">{{ settings.index-feature-2-c-title }}</span>
+                            <span class="long_name">{{ settings.index-feature-2-c-summary }}</span>
+                        </div>
+                    </a>
+                    {% endunless %}
+                    {% unless settings.index-feature-2-d-url  contains 'e.g.' or settings.index-feature-2-d-url  == blank %}
+                    <a style="background-image: url({{ 'index-feature-2-d.jpg' | asset_url }}); left: 0px;" class="product" href="{{ settings.index-feature-2-d-url }}">
+                        <div class="name">
+                            <span class="short_name">{{ settings.index-feature-2-d-title }}</span>
+                            <span class="long_name">{{ settings.index-feature-2-d-summary }}</span>
+                        </div>
+                    </a>
+                    {% endunless %}
+                </div>
+                <div class="nav">
+                    <a href="#prev" class="prev">Previous</a>
+                    <a href="#next" class="next">Next</a>
+                </div>
+            </div>
+        </div>
+        <div class="span4 column full-hotspot">
+            <div class="box top-hotspot">
+                <a href="{{ settings.index-feature-3-a-url }}"></a>
+            </div>
+            <div class="box bottom-hotspot">
+                <a href="{{ settings.index-feature-3-b-url }}"></a>
+            </div>
+            <img src="{{ 'index-feature-3.jpg' | asset_url }}">
+        </div>
+
+        <div class="span4 column">
+            <div class="box journal" style="background-image:url({{ 'index-feature-4.jpg' | asset_url }})">
+                <a href="{{ settings.index-feature-4-url }}">
+                    <span class="title" style="color:{{ settings.index-feature-4-color-title }};">{{ settings.index-feature-4-title }}</span>
+                    <span style="color:{{ settings.index-feature-4-color-summary }};">{{ settings.index-feature-4-summary }}</span>
+                </a>
+            </div>
+        </div>
+        <div class="span4 column">
+            <div class="box journal" style="background-image:url({{ 'index-feature-5.jpg' | asset_url }})">
+                <a href="{{ settings.index-feature-5-url}}">
+                    <span class="title" style="color:{{ settings.index-feature-5-color-title }};">{{ settings.index-feature-5-title }}</span>
+                    <span style="color:{{ settings.index-feature-5-color-summary }}">{{ settings.index-feature-5-summary }}</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,198 @@
+#holiday-hero{
+  width:100%;
+  height:395px; 
+  background-image:url({{ '12days-hero.jpg' | asset_url }}); 
+  background-size:cover;
+  background-position: center;
+}
+
+#holiday-hero-mobile { display: none;}  
+
+#holiday-season .container {
+  margin-top: 120px;
+}
+
+#feature-number {
+  display: table;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
+#feature-product {
+  display: table;
+  margin: 20px auto;
+  max-width: 90%;
+}
+
+#discount-text {
+  text-align: center;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+#shop-buttons {
+  display: table;
+  margin: 20px auto 40px;
+}
+
+#shop-buttons a {
+  background: #8a210e;
+  padding: 26px 0px;
+  display: block;
+  float: left;
+  margin: 0 10px;
+  width: 220px;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 1px;  
+  text-decoration: none;
+}
+
+#disclaimer-text {
+  text-align: center;
+  color: #bababa;
+  font-style: italic;
+  font-size: 16px;
+}
+
+#deals {
+  margin: 110px auto 100px;
+  display: table;
+}
+
+#deals li {
+  width: 215px;
+  height: 215px;
+  margin: 7px 14px 7px 0;
+  float: left;
+  background: #f0efed;
+  list-style: none;
+  border: 8px solid #dddddd;
+  position:relative;
+}
+
+#deals li:nth-child(4n+4) {
+  margin-right:0;
+}
+
+#deals li.active {
+  border-color: #A11B04;
+}
+
+#deals li .wrap {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  width: 100%;
+  height: 100%;  
+  background-size:cover;
+  background-position: center;  
+  position: relative;
+}
+#deals li.active .wrap {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+}
+
+
+#deals li span{
+  font-size: 80px;
+  font-weight: bold;
+  line-height: 1;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  color: #dddddd;
+  padding: 0px;
+  margin: 0;
+  text-align: center;
+}
+
+#deals li.active span {
+  color: #ffffff;
+  height: 100%;
+  width: 100%;
+}
+
+#deals li.active span a{
+  color: #ffffff;
+  width: 100%;
+  height: 100%;
+  display: table;
+  text-align: center;
+  line-height: 215px;
+  text-decoration:none;
+}
+
+
+
+
+#foot-shipping {
+  width: 80%;
+  max-width: 660px;
+  display: table;
+  margin: 120px auto;
+  text-align: center;
+  color:#89200d;
+}
+
+.free-shipping {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+#foot-shipping hr {
+  border-top: solid #89200d 1px;
+}
+
+.shipping-deadline {
+  color: #cccccc;
+  font-weight: bold;
+  font-size: 17px;
+  max-width: 400px;
+  margin: 0 auto 40px;
+  line-height: 1.3;
+}
+
+
+
+
+@media (max-width: 1024px) {
+
+  #deals li:nth-child(4n+4) {margin-right:14px;}
+  #deals li:nth-child(3n+3) {margin-right:0px;}
+  #deals li:nth-child(3n+4) {clear:both;}
+
+}
+
+@media (max-width: 767px) {
+
+  #deals li:nth-child(3n+3) {margin-right:14px;}
+  #deals li:nth-child(2n+2) {margin-right:0px;}
+  #deals li:nth-child(3n+4) {clear:none;}
+  #deals li:nth-child(2n+3) {clear:both;}
+
+}
+
+@media (max-width: 500px) {
+  #holiday-season .container { margin-top: 40px;}  
+  #shop-buttons a {float: none !important; margin-top: 20px;}
+  #deals { margin: 60px auto;}
+  #foot-shipping { margin: 60px auto;}  
+  #holiday-hero { display: none !important;}  
+  #holiday-hero-mobile { display: block !important;}  
+}
+
+@media (max-width: 480px) {
+  #deals li {clear:both !important; margin-right:0px !important;}
+  #holiday-hero { display: none !important;}  
+  #holiday-hero-mobile { display: block !important;}  
+}
+

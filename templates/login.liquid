@@ -1,0 +1,165 @@
+{% layout settings.customer_layout %}
+
+<div id="template" class="container" role="main">
+
+    <div id="corner-shoe" class="js-corner-shoe hidden-phone">
+
+        {% for product in collections.corner-shoe.products %}
+
+        <img class="main_image" src="https://s3.amazonaws.com/seavees-production/highlight_shoes/1/default/Bocce_sale_Shoe_Corner.jpg?1405542684" alt="{{ product.featured_image.alt | escape }}" />
+        <a href="{{ product.url | within: collection }}"></a>
+
+        {% endfor %}
+
+    </div>
+
+    <header role="main">
+        <h1>Log in to SeaVees</h1>
+    </header>
+
+    <div class="page_container">
+        <div id="login-panel">
+
+            <div id="customer" style="width: 100%;">
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h2>Log in</h2>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    
+                    <div id="password-credentials" class="span6">
+                        {% form 'customer_login' %}
+                        {{ form.errors | default_errors }}
+
+                            <div id="login_email" class="control-group clearfix">
+                                <label for="customer_email" class="login">Email Address</label>
+                                <input type="email" value="" name="customer[email]" id="customer_email" class="title input-xlarge" size="30" />
+                            </div>
+
+                            {% if form.password_needed %}
+
+                            {% comment %}
+                            Customer Account Login
+                            {% endcomment %}
+
+                            <div id="login_password" class="clearfix control-group">
+                                <label for="customer_password" class="login">Password</label>
+                                <input type="password" value="" name="customer[password]" id="customer_password" class="title input-xlarge password" size="16" />
+                            </div>
+
+                            {% endif %}
+
+                            <div class="control-group remember-me">
+                                <label>
+                                    <input type="hidden" value="0" name="user[remember_me]">
+                                    <input id="user_remember_me" type="checkbox" value="1" tabindex="3" name="user[remember_me]">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <button class="btn btn-primary" tabindex="4" type="submit" value="Login">Login</button>
+
+                        {% endform %}
+
+                        <div class="actions">
+                            {{ 'Create a new account' | customer_register_link }}
+                            |
+                            <a href="#" onclick="showRecoverPasswordForm();return false;">Forgot your password?</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+            {% comment %}
+            Recover Password Form
+            {% endcomment %}
+
+
+            <div id="recover-password" style='display:none;width:100%;'>
+
+
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h2>Forgot Password?</h2>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span4 offset4">
+                        <p>Fill out the form below and instructions to reset your password will be emailed to you:</p>
+                        {% form 'recover_customer_password' %}
+                        {{ form.errors | default_errors }}
+
+                        <div id="recover_email" class="clearfix control-group">
+                            <label for="email" class="large">Email</label>
+                            <input type="email" value="" size="30" name="email" id="recover-email"  class="input-xlarge" />
+                        </div>
+
+                        <button class="btn btn-primary" type="submit" value="Submit">Reset my password</button>
+
+                        {% endform %}
+
+                        <div class="actions">
+                            <a href="#" onclick="hideRecoverPasswordForm();return false;">Login as Existing Customer</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+            {% comment %}
+            Guest Login form for shops with optional customer accounts. This form is displayed only when users click on the checkout link
+            on the cart page.
+            {% endcomment %}
+
+
+
+            {% if shop.checkout.guest_login %}
+
+            <div id="guest" style='width:100%;'>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h2>Guest Login</h2>
+                    </div>
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span4 offset4">
+                        {% form 'guest_login' %}
+                            <input class="btn btn-primary"  type="submit" value="Continue as Guest" />
+                        {% endform %}
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+function showRecoverPasswordForm() {
+document.getElementById('recover-password').style.display = 'inline-block';
+document.getElementById('customer').style.display='none';
+}
+
+function hideRecoverPasswordForm() {
+document.getElementById('recover-password').style.display = 'none';
+document.getElementById('customer').style.display = 'inline-block';
+}
+
+if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+</script>

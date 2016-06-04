@@ -1,0 +1,64 @@
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+// Load the plugin.
+ga('require', 'linker');
+
+// Define which domains to autoLink.
+ga('linker:autoLink', ['shop.seavees.com', 'seavees.com']);
+
+ga('create', 'UA-3981552-1', 'auto', {
+  'allowLinker': true
+});
+
+ga('send', 'pageview');
+
+ga('require', 'ecommerce');
+
+ga('ecommerce:addTransaction', {
+	'id': '{{ order.order_number }}', // transaction ID - required
+	'affiliation': '{{ shop.name }}', // affiliation or store name
+	'revenue': '{{ checkout.subtotal_price | money_without_currency }}', // total - required
+	'shipping': '{{ checkout.shipping_price | money_without_currency }}', // shipping
+	'tax': '{{ checkout.tax_price | money_without_currency }}' // tax
+});
+
+{% for line_item in line_items %}
+
+ga('ecommerce:addItem', {
+	'id': '{{ order.order_number }}',  // transaction ID - required
+	'name': '{{ line_item.title }}', // product name - required
+	'sku': '{{ line_item.sku }}', // SKU/code - required
+	'category': '{Sneakers}',
+	'price': '{{ line_item.price | money_without_currency }}', // unit price - required
+	'quantity': '{{ line_item.quantity }}' // quantity - required
+});
+
+{% endfor %}
+
+ga('ecommerce:send');
+
+</script>
+<!-- End Google Analytics -->
+
+
+<!-- Convert.com Goal -->
+
+{% assign products_count = 0 %}
+
+{% for line_item in line_items %}
+
+{% capture products_count %}{{ products_count | plus: line_item.quantity }}{% endcapture %}
+
+{% endfor %}
+
+<script type="text/javascript">
+var _conv_q = _conv_q || [];
+_conv_q.push(["sendRevenue", '{{ order_number }}','{{ subtotal_price | money_without_currency }}', '{{ products_count }}','100111072']);
+</script>
+
+<!-- End Convert.com Goal -->

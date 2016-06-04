@@ -1,0 +1,64 @@
+{% unless template == 'index' or template == 'cart' %}
+<div id="breadcrumb" class="container breadcrumbs">
+
+    <nav id="breadcrumbs">
+
+        <ul class="inline">
+
+            <li>
+                <a href="http://seavees.com" class="homepage-link" title="Back to the frontpage">Home</a>
+                <span class="separator"> > </span>
+            </li>
+
+            {% if template contains 'product' %}
+
+
+            {% if collection %}         
+            <li>
+                {% if collection.handle %}
+                    {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+                    {{ collection.title | link_to: url }}
+                    <span class="separator"> > </span>
+                {% endif %}
+            </li>
+            {% endif %}
+
+            <li>
+                <a href="">{{ product.title }}</a>
+            </li>
+
+            {% elsif template contains 'collection' and collection.handle %}
+                {% if current_tags %}
+                <li>
+                    <span class="separator"> > </span>
+                    {% capture url %}/collections/{{ collection.handle }}{% endcapture %}
+                    {{ collection.title | link_to: url }}
+                    <span class="separator"> > </span>
+                    <span class="page-title">{{ current_tags.first }}</span>
+                </li>
+                {% else %}
+                    <span class="separator"> > </span>
+                    <span class="page-title">{{ collection.title }}</span>
+                {% endif %}
+
+            {% elsif template == 'article' %}
+            <li>
+                <span class="separator"> > </span> 
+                {{ blog.title | link_to: blog.url }}
+            </li>
+
+            {% elsif template contains 'page' %}
+                <li>
+                    <span class="separator"> > </span>
+                    {{ page.title }}
+                </li>
+            {% else %}
+                <li>
+                    <span class="separator"> > </span>
+                    <span class="page-title">{{ page_title }}</span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endunless %}

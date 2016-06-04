@@ -1,0 +1,43 @@
+<!-- Solution brought to you by Caroline Schnapp -->
+<!-- See this: http://wiki.shopify.com/Related_Products -->
+
+{% assign number_of_related_products_to_show = 2 %}
+{% assign image_size = 'medium' %}
+{% assign heading = 'Shop similar styles' %}
+
+{% assign number_of_related_products_to_fetch = number_of_related_products_to_show | plus: 1 %}
+
+{% if collection == null or collection.handle == 'frontpage' or collection.handle == 'all' %}
+{% assign found_a_collection = false %}
+{% for c in product.collections %}
+    {% if found_a_collection == false and c.handle != 'frontpage' and c.handle != 'all' and c.all_products_count > 1 %}
+        {% assign found_a_collection = true %}
+        {% assign collection = c %}
+    {% endif %}
+{% endfor %}
+{% endif %}
+
+{% if collection and collection.products_count > 1 %}
+
+    <div id="product-suggestions">
+        <h2>{{ heading }}</h2>
+        <ul class="related-products">
+        {% assign current_product = product %}
+        {% assign current_product_found = false %}
+        {% for product in collection.products limit: number_of_related_products_to_fetch %}
+            {% if product.handle == current_product.handle %}
+                {% assign current_product_found = true %}
+            {% else %}
+            {% unless current_product_found == false and forloop.last %}
+            <li class="product-suggestion">
+                <a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">
+                    {{ product.featured_image | product_img_url: 'large' | img_tag }}
+                </a>
+            </li>
+           {% endunless %}
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+
+{% endif %}

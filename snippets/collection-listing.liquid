@@ -1,0 +1,54 @@
+{% comment %}
+Be prepared to use this snippet to showcase collections specified in a link list as per this solution here: 
+"Featuring collections using a Link List" http://docs.shopify.com/support/your-store/collections/featuring-collections-using-link-lists
+If this snippet is called with an argument, we'll assume it is the handle of a link list, and we will use that list.
+If this snippet is not called with an argument, we'll assume we are on the /collections page and will list all collections
+in the shop, all except the 'frontpage' and 'all' collections.
+Merchants often create an 'all' collection to control their Catalog page at /collections/all as per these instructions:
+"Taking Control of your Catalog Page" http://docs.shopify.com/support/your-store/collections/taking-control-of-your-catalog-page
+and don't want that collection to appear on their /collections page.
+{% endcomment %}
+
+{% assign using_link_list = true %}
+
+<div id="taxons-collection" class="container" role="main">
+
+	{% comment %}
+	{% include 'corner_shoe' %}
+	{% endcomment %}
+
+	{% if collection-listing != '' and linklists[collection-listing].handle == collection-listing and linklists[collection-listing].links.size > 0 %}
+		{% assign using_link_list = true %}
+	{% endif %}
+
+	<header role="main">
+        {% comment %}<h1>{% if using_link_list %}{{ linklists[collection-listing].title }}{% else %}Collections{% endif %}</h1>{% endcomment %}
+		<h1>Collections</h1>
+    </header>
+
+    <div class="page-container">
+
+    	<div class="product-collection" data-hook="taxon_products">
+
+    		<div class="product-collection-section">
+				{% if using_link_list %}
+				<ul class="grid clearfix">
+				{% for collection in collections %}
+				<li class="n-li-collection">
+					{% if collection.image %}
+						<img src="{{ collection | img_url: 'medium' }}" alt="{{ collection.image.alt }}" />
+					{% else %}
+						<img src="{{ collection.products.first | img_url: 'medium' }}" alt="{{ collection.title | escape  }}" />
+					{% endif %}
+				{% include 'collection-grid-item' with 'four-per-row' %}
+				</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+			</div>
+		</div>
+
+	</div>
+
+</div>

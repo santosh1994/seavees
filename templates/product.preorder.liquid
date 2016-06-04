@@ -1,0 +1,350 @@
+{% include 'breadcrumbs' %}
+
+<div class="product" itemscope itemtype="http://schema.org/Product">
+
+    <a class="free-shipping-banner visible-phone" href="http://seavees.com/orders-shipping/">FREE SHIPPING ON DOMESTIC US ORDERS OVER $50</a>
+  
+    <meta itemprop="url" content="{{ shop.url }}{{ product.url }}" />
+    <meta itemprop="image" content="{{ product.featured_image.src | product_img_url: 'grande' }}" />
+
+    <form action="/cart/add" method="post" id="product-form" enctype="multipart/form-data">
+
+        <div id="product-image">
+            {% if product.images.size == 0 %}
+
+            <img src="{{ '' | product_img_url: '2048x2048' }}" alt="" />
+
+            {% else %}
+
+            <img src="{{ product.featured_image.src | product_img_url: '2048x2048' }}" alt="{{ product.featured_image.alt | escape }}" />
+
+            {% endif %}
+
+            {% if product.metafields.c_f.featured_product_text %}
+            <div class="flag featured-flag" data-color="#{{ product.metafields.c_f.product_featured_color }}" style="background-color: rgb(1, 119, 155);">
+                <p>{{ product.metafields.c_f.featured_product_text }}</p>
+                <div class="arrow" style="background-color: #{{ product.metafields.c_f.product_featured_color }}"></div>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <div class="container" role="main" itemscope itemtype="http://schema.org/Product">
+
+
+            <div class="product-main">
+                <div class="row-fluid header">
+                    <div class="span5">
+                        <h1 itemprop="name" data-toggle="tooltip" title="first tooltip">
+                            <span class="short-name">
+                                {% if product.metafields.c_f.short_name %}
+                                    {{ product.metafields.c_f.short_name }}
+                                {% endif %}
+                            </span>
+                            {{ product.title | remove: "Mens -" | remove: "Womens -" }}
+                        </h1>
+
+                    <!--  thumbnails -->
+                        <div class="thumbnails">
+                            {% if product.images.size > 1 %}
+                            <ul id="product-photo-thumbs" class="clearfix grid">
+
+                                <li class="product-photo-thumb photo">
+                                    <a class="gallery" href="{{ product.featured_image.src | product_img_url: '2048x2048' }}" rel="gallery">
+                                        <img src="{{ product.featured_image.src | product_img_url: 'compact' }}" alt="{{ product.featured_image.alt | escape }}" />
+                                    </a>
+                                </li>
+
+                                {% for image in product.images offset:1 %}
+                                <li class="product-photo-thumb photo">
+                                    <a class="gallery" href="{{ image.src | product_img_url: '2048x2048' }}" rel="gallery">
+                                        <img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}" />
+                                    </a>
+                                </li>
+                                {% endfor %}
+
+                                {% if product.metafields.c_f.product_video %}
+                                <li class="preview-video">
+                                    <a class="thumb" data-vimeo-id="{{ product.metafields.c_f.product_video }}" href="//vimeo.com/{{ product.metafields.c_f.product_video }}">
+                                        <script type="text/javascript">
+                                            function vimeoLoadingThumb(id){    
+                                                var url = "//vimeo.com/api/v2/video/" + id + ".json?callback=showThumb";
+                                                  
+                                                var id_img = "#vimeo-" + id;
+                                                var script = document.createElement( 'script' );
+                                                script.type = 'text/javascript';
+                                                script.src = url;
+
+                                                $(id_img).before(script);
+                                            }
+
+                                            function showThumb(data){
+                                                var id_img = "#vimeo-" + data[0].id;
+                                                $(id_img).attr('src',data[0].thumbnail_medium);
+                                            }
+
+                                            $(function() {
+                                                vimeoLoadingThumb( {{ product.metafields.c_f.product_video }} );
+                                            });
+                                        </script>
+                                        <img id="vimeo-{{ product.metafields.c_f.product_video }}" src="" alt="Vimeo" />
+                                    </a>
+                                </li> 
+                                {% endif %}
+
+                            </ul>
+                            {% endif %}
+                        </div>
+
+                        <!-- end thumbnails -->
+
+                    </div>
+
+                    <div class="span7 details" id="cart-form">
+
+                        <div class="product-form">
+                        
+                            <div class="prices" id="product-prices" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                                <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+                                {% if product.available %}
+                                <link itemprop="availability" href="http://schema.org/InStock" />
+                                {% else %}
+                                <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                {% endif %}
+                                <p>
+                                    {% if product.compare_at_price > product.price %}
+                                    <span class="selling original_prices">{{ product.compare_at_price_max | money  | remove: " " | remove: ".00"}}</span>
+                                    <span class="selling sale_prices">{{ product.price | money | remove: " " | remove: ".00"}}</span>
+                                    {% else %}
+                                    <span class="selling">{{ product.price | money | remove: " " | remove: ".00"}}</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+
+                            {% assign hide_default_title = false %}
+                            {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+                                {% assign hide_default_title = true %}
+                            {% endif %}
+
+
+
+                            {% if product.metafields.c_f.color_swatch %}
+                            <div id="product-variants" class="section">
+                                <!-- <h3>Select Color:</h3> -->
+                                <ul class="swatches">
+
+                                    {% paginate collections.all.products by 1000 %}
+                                        {% for prod in collections.all.products %}
+                                            {% if product.title == prod.title %}
+                                            {% if product.type == prod.type %}
+                                            {% if product.metafields.c_f.product_material == prod.metafields.c_f.product_material %}
+                                                <li>
+                                                    <label>
+                                                        <a href="{{prod.url}}" class="swatch">
+                                                            <div   {% if product.url == prod.url %} class="color_swatch_active" {% else %} class="color_swatch" {% endif %} style="background-color: {{prod.metafields.c_f.color_swatch}}" title="{{prod.metafields.c_f.colorway}}">&nbsp;</div>
+                                                        </a>
+                                                    </label>
+                                                </li>
+                                            {% endif %}
+                                            {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endpaginate %}
+
+                                </ul>
+
+                                <br /><span class="n-color-info">Color: <strong style="font-style: normal !important;}">{{ product.metafields.c_f.colorway }}</strong></span>
+
+                            </div>
+                            {% endif %} 
+                            {% if product.variants.size > 1 %}
+                            <div id="product-sizes" class=" {% if hide_default_title %} hidden{% endif %}">
+                                <select id="product-select" name="id" class="hidden">
+                                {% for variant in product.variants %}
+                                    {% if variant.inventory_quantity >= 1 %}
+                                    <option value="{{ variant.id }}">{{ variant.title }}</option>
+                                    {% else %}
+                                    <option value="{{ variant.id }}">{{ variant.title }} - Pre-Order</option>
+                                    {% endif %}
+                                {% endfor %}
+                                </select>
+                            </div>
+                          {% else %}
+                          	<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                          {% endif %}   
+
+
+
+
+                            <div id="product-add" class="add-to-cart">
+                                <button type="submit" name="add" id="add" value="Add to bag">Pre-Order</button>
+                            </div>
+
+                            {% unless product.tags contains "Final Sale" %} 
+                          	<div class="product-note">
+                            {% if collection.title != "Womens Sale" and collection.title != "Mens Sale" %}
+                            {% if product.tags contains "Sale" %}
+                                Free shipping over $50.
+                            {% else %}
+                                Free exchanges &amp; free shipping over $50.
+                            {% endif %}
+                            {% endif %}
+                              
+                            {% if product.metafields.c_f['shipping_timeline'] != blank %}
+                            	<div class="shipping-timeline product-note">{{ product.metafields.c_f['shipping_timeline'] }}</div>
+                            {% endif %}
+                              
+								{% for tag in product.tags %}
+									{% if tag contains "Preorder:" %}
+									<p class="preorder"><strong>{{ tag | remove: "Preorder:" }}</strong></p>
+									{% endif %}
+								{% endfor %}
+                              
+                              
+                            </div>
+                            {% endunless %}
+
+                            {% if product.tags contains "Final Sale" %}
+                            <div class="on-sale-note product-note"> * FINAL SALE. No returns or exchanges on this item. </div>
+                            {% endif %}
+
+                            {% if show_button %}
+                            <a href="#" class="find_size" id="BIS_trigger">Can't find your size?</a>
+                            {% endif %} 
+
+                        </div>
+                        
+                        <!--
+                        <div class="social" style="display: block;">
+                            <div class="addthis_sharing_toolbox"></div>
+                        </div>
+                        -->
+
+                    </div>
+
+                    
+                </div>
+
+            </div>
+
+            <div class="row-fluid meta">
+                <div class="span5">
+                    <div class="specification" itemprop="description">
+                        <h2>{% if product.metafields.c_f.short_name %}{{ product.metafields.c_f.short_name }} {% endif %}{{ product.title }}{% if product.metafields.c_f.product_material %} {{ product.metafields.c_f.product_material }}{% endif %} Specs</h2>
+                        {{ product.description }}
+                    </div>
+                </div>
+
+                <div class="offset1 span6 description">
+                    <h2>{% if product.metafields.c_f.short_name %}{{ product.metafields.c_f.short_name }} {% endif %}{% if product.type == 'Goods' %}About{% else %}Origin{% endif %}</h2>
+                        {% if product.metafields.c_f.short_description %}
+                            {{ product.metafields.c_f.short_description }}
+                        {% endif %}
+
+                    {% if product.metafields.c_f.size_chart %}
+                    <h2> Sizing </h2>
+                    <p>See our <a href="http://seavees.com/size-chart.pdf" target="_blank">size chart</a>  for standard sizing information. </p>
+                    {% endif %}
+                    
+                    {% if product.metafields.c_f.size_chart_text %}
+                    <p>{{ product.metafields.c_f.size_chart_text }}</p>
+                    {% endif %}
+
+                    {% include 'related-products' %}
+                        
+                </div>
+
+            </div>
+
+ 
+        </div>
+
+    </form>
+
+</div>
+
+
+
+
+{% comment %}
+Adding support for product options. See here for details: http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options
+{% endcomment %}
+
+<script>
+  
+var selectCallback = function(variant, selector) {
+
+  if (variant) {
+    
+    // Selected a valid variant that is available.
+    if (variant.available) {
+          
+      // Enabling add to cart button.
+      jQuery('#add').removeClass('disabled').removeAttr('disabled').val('Add to Cart').fadeTo(200,1);
+    
+      // If item is backordered yet can still be ordered, we'll show special message.
+      if (variant.inventory_management && variant.inventory_quantity <= 0) {
+        jQuery('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+        jQuery('#backorder').removeClass("hidden");
+      } else {
+        jQuery('#backorder').addClass("hidden");
+      }
+      
+    } else {
+      // Variant is sold out.     
+    }
+    
+    // Whether the variant is in stock or not, we can update the price and compare at price.
+    if ( variant.compare_at_price > variant.price ) {
+      jQuery('#product-price').html('<span class="selling original_price">'+Shopify.formatMoney(variant.compare_at_price, "{{ shop.money_format }}")+ '</span>'+'<span class="selling sale_price">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") +'</span>');
+    } else {
+      jQuery('#product-price').html('<span class="product-price">'+ Shopify.formatMoney(variant.price, "{{ shop.money_format }}") + '</span>' );
+    }        
+
+  } else {
+	jQuery('#add').val('Unavailable').addClass('disabled').attr('disabled', 'disabled').fadeTo(200,0.5);
+  }
+
+};
+  
+jQuery(function($) {
+
+        {% if product.variants.size > 1 %}new Shopify.OptionSelectors('product-select', { product: {{ product | json }}, onVariantSelected: selectCallback });{% endif %}
+  
+  // Add label if only one product option and it isn't 'Title'.
+  {% if product.options.size == 1 and product.options.first != 'Title' %}
+    $('.selector-wrapper:eq(0)').prepend('<label>{{ product.options.first }}</label>');
+  {% endif %}
+  
+  // Auto-select first available variant on page load.
+  {% assign found_one_in_stock = false %}
+  {% for variant in product.variants %}
+    {% if variant.available and found_one_in_stock != false %}
+      {% assign found_one_in_stock = true %}
+      {% for option in product.options %}
+      $('.single-option-selector:eq({{ forloop.index0 }})').val({{ variant.options[forloop.index0] | json }}).trigger('change');
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+
+  $('#product-select-option-0').prepend('<option selected="selected">-- Select Size --</option>');
+
+
+        //hide any single option selectors - NELSON
+
+      $('select.single-option-selector').each(function(){
+      if ($(' > option', this).length == 1){
+      	$(this).css('display', 'none');
+          $(this).prev().css('display', 'none');
+       }
+       });
+      
+/*
+  $('.single-option-selector option').each(function(i,e){
+    console.log(e);
+  });
+*/
+
+});
+
+</script>

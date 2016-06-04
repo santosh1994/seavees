@@ -1,0 +1,44 @@
+
+
+
+{% if customer %} {% assign digest = customer.id | append:customer.email | append:'b084bd40-0b3f-4971-b3f7-a070949a9e0d' | md5 %} {% endif %}
+
+<script type="text/javascript">
+window.sloyalty = window.sloyalty || {};
+window.sloyalty.shop = 'shop.seavees.com';
+
+window.sloyalty.customer_id = '{% if customer %}{{ customer.id }}{% endif %}';
+window.sloyalty.digest = '{% if customer %}{{ digest }}{% endif %}';
+
+</script>
+
+
+
+
+
+
+<div class="sloyalty-referral-widget"
+     data-shop="shop.seavees.com"
+     data-customer="{% if customer %}{{ customer.id }}{% endif %}"></div>
+
+
+
+
+
+
+{% if customer %}
+{% assign digest = customer.id | append:customer.email | append:'b084bd40-0b3f-4971-b3f7-a070949a9e0d' | md5 %}
+
+<div class="sloyalty-standalone-share-widget"
+     data-shop="shop.seavees.com"
+     data-customer="{{ customer.id }}"
+     data-digest="{{ digest }}"></div>
+{% else %}
+<div class="sloyalty-standalone-share-widget"
+     data-shop="shop.seavees.com"
+     data-customer=""></div>
+{% endif %}
+
+
+
+

@@ -264,7 +264,57 @@
 </div>
 
 
-
+<script>
+  if(window['UnbxdWidgetsConf']){
+    UnbxdWidgetsConf.pid = "{{product.id}}"
+  }
+</script>
+<style>
+  #unbxd_more_like_these ul.unbxd-widgets li:first-child a {
+    margin-left: 0px;
+  }
+  #unbxd_more_like_these ul.unbxd-widgets li:last-child a {
+    margin-right: 0px;
+  }
+  @media (min-width:1197px){
+   	ul.unbxd-widgets {
+    	overflow-x: hidden !important;
+	} 
+  }
+  @media (max-width:1196px){
+   	#unbxd_more_like_these{
+      margin-bottom: 100px !important;
+  	}	
+  }
+  .unbxd-headLeftHz .unbxd-class1 {
+    font-family: "news-gothic-std", sans-serif !important;
+/*     font-size: 22px !important; */
+  }
+  #unbxd_more_like_these{
+    margin-top: 0px !important;
+  }
+  .unbxd-top-height{
+    margin-bottom: 50px!Important;
+  }
+  .unbxd-widget-container{
+    max-width: 1210px !important;
+  }
+  .unbxd-widgets {
+  	scrollbar-highlight-color:#eee;
+    scrollbar-face-color:#2c536e;
+  }
+  .unbxd-price {
+    color: #aaaaaa!important;
+  }
+</style>
+<div id="unbxd_more_like_these" class="unbxd-widget-container" style="margin-bottom:50px;"></div>
+<script>
+  if($(window).width() <= 450){
+    var style = $('<style>.unbxd-widgets li { padding: 0 '+($(window).width()-291)/2+'px; }</style>');
+    $('.unbxd-widget-container').after(style);
+  }
+  
+</script>
 
 {% comment %}
 Adding support for product options. See here for details: http://docs.shopify.com/support/your-website/themes/can-i-make-my-theme-use-products-with-multiple-options

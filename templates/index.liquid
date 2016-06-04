@@ -133,8 +133,35 @@ Example: the h2 element should have the same size and color in:
     </div>
 </div>
 
+<!-- unbxd style -->
+<!-- <style>
+  #unbxd_top_sellers ul.unbxd-widgets li:first-child a {
+    margin-left: 0px;
+  }
+  #unbxd_top_sellers ul.unbxd-widgets li:last-child a {
+    margin-right: 0px;
+  }
+  
+  .unbxd-contHz {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  
+  .unbxd-widgets {
+  	scrollbar-highlight-color:#eee;
+    scrollbar-face-color:#2c536e;
+  }
+</style> -->
 
-
+<!-- unbxd style -->
+<!-- <div id="unbxd_top_sellers" class="unbxd-widget-container" style="margin-top:60px;"></div>
+<script>
+  if($(window).width() <= 450){
+    var style = $('<style>.unbxd-widgets li { padding: 0 '+($(window).width()-291)/2+'px; }</style>');
+    $('.unbxd-widget-container').after(style);
+  }
+  
+</script> -->
 <div id="promo-boxes" class="container">
     <div class="row-fluid">
         <div class="span4 column">

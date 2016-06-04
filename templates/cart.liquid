@@ -3,7 +3,7 @@
         <h1> Shopping Bag </h1>
     </header>
 
-    <div class="page-container">
+    <div class="page-container  unbxd-top-height">
         <div id="cart" class="row-fluid">
             {% comment %}
             START CART
@@ -275,7 +275,46 @@
     </div>
 </div>
 
-
+<style>
+  .unbxd-top-height{
+    margin-bottom: 0px !important;
+  }
+  @media (min-width:1197px){
+   	ul.unbxd-widgets {
+    	overflow-x: hidden !important;
+	} 
+  }
+  @media (max-width:1196px){
+   	#unbxd_cart_recommendations{
+      margin-bottom: 100px !important;
+  	}	
+  }
+  #unbxd_cart_recommendations ul.unbxd-widgets li:first-child a {
+    margin-left: 0px;
+  }
+  #unbxd_cart_recommendations ul.unbxd-widgets li:last-child a {
+    margin-right: 0px;
+  }
+  #unbxd_cart_recommendations{
+    margin-top: 0px !important;
+    margin-bottom: 50px !important;
+  }
+  .unbxd-price {
+    color: #aaaaaa!important;
+  }
+  .unbxd-widgets {
+  	scrollbar-highlight-color:#eee;
+    scrollbar-face-color:#2c536e;
+  }
+</style>
+<div id="unbxd_cart_recommendations" class="unbxd-widget-container"></div>
+<script>
+  if($(window).width() <= 450){
+    var style = $('<style>.unbxd-widgets li { padding: 0 '+($(window).width()-291)/2+'px; }</style>');
+    $('.unbxd-widget-container').after(style);
+  }
+  
+</script>
 <div class="globalcheckout">
   <form id="globalcheckoutform" method="post" action="https://secure.globalcheckout.com/global-check-out.do">
 
